@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>アニマルカードゲーム 検索UI</title>
+  <style>
+    :root { --gap: 12px; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", YuGothic, Meiryo, sans-serif; margin: 0; background: #fafafa; color: #222; }
+    /* header { position: sticky; top: 0; z-index: 2; background: #fff; border-bottom: 1px solid #eee; } */
+    header { background: #fff; border-bottom: 1px solid #eee; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+    /* input[type="text"], input[type="number"], select, textarea {
+      width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid #ddd; border-radius: 10px; background: #fff; font-size: 16px; line-height: 1.6;
+    }
+    textarea { min-height: 56px; resize: vertical; } */
+    /* 余白と高さを控えめに */
+    input[type="text"], input[type="number"], select, textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;            /* 12px → 8px */
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: #fff;
+        font-size: 15px;         /* 16px → 15px */
+        line-height: 1.5;        /* 1.6 → 1.5 */
+    }
+    textarea { min-height: 40px; resize: vertical; } /* 56px → 40px */
+    fieldset { border: 1px solid #eee; border-radius: 10px; padding: 12px; }
+    legend { padding: 0 6px; color: #666; font-size: 12px; }
+    label { display: block; margin: 8px 0; }
+
+    .filters { display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+    .card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 12px; }
+
+    .row { display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+    .row-2 { display: grid; grid-template-columns: 1fr; gap: var(--gap); }
+    .row-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--gap); }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .actions label { white-space: nowrap; }
+    button { padding: 10px 14px; border: 1px solid #ddd; border-radius: 10px; background: #fff; cursor: pointer; font-size: 14px; }
+    button:hover { background: #f5f5f5; }
+
+    .pillbar { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { padding: 8px 12px; border: 1px solid #ddd; border-radius: 999px; background: #fff; cursor: pointer; user-select: none; }
+    .pill.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+
+    .territory-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; }
+    .territory-item { display: grid; grid-template-columns: 1fr 80px; align-items: center; gap: 10px; }
+
+    .results-head { display: flex; align-items: center; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .card-item { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+    .thumb { /*aspect-ratio: 3/4;*/ background: #f3f3f3; display: grid; place-items: center; overflow: hidden; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .meta { padding: 12px; display: grid; gap: 8px; }
+    .name { font-weight: 700; font-size: 16px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag { font-size: 11px; padding: 2px 6px; border: 1px solid #e5e5e5; border-radius: 999px; color: #555; background: #fafafa; }
+    details summary { cursor: pointer; color: #555; }
+
+    @media (min-width: 900px) {
+      .filters { grid-template-columns: 380px 1fr; }
+      .row-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    /* モーダル */
+    .modal.hidden { display: none; }
+    .modal { position: fixed; inset: 0; z-index: 50; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+    .modal-dialog { position: relative; margin: 6vh auto; max-width: 720px; width: calc(100% - 32px);
+      background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.2); display: grid; grid-template-rows: auto 1fr auto; }
+    .modal-header { padding: 14px 16px; border-bottom: 1px solid #eee; }
+    .modal-body { padding: 12px 16px; max-height: 60vh; overflow: auto; display: grid; gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .modal-footer { padding: 12px 16px; border-top: 1px solid #eee; display: flex; gap: 8px; justify-content: flex-end; }
+
+    /* 種族設定用タグ */
+    #raceSummary { gap: 6px; }
+    #raceSummary .tag { background:#f3f7ff; border-color:#dfe7ff; }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1 style="margin:6px 0 12px">アニマルカードゲーム 検索</h1>
+      <div class="actions" style="margin-bottom:8px">
+        <button id="btn-reset">条件をリセット</button>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap: wrap;">
+          <label style="display:flex; gap:6px; align-items:center">
+            効果語句の結合:
+            <select id="effectMode">
+              <option value="AND">AND（すべて含む）</option>
+              <option value="OR">OR（いずれか含む）</option>
+            </select>
+          </label>
+          <label style="display:flex; gap:6px; align-items:center">
+            画像表示:
+            <select id="thumbMode">
+              <option value="on">サムネ</option>
+              <option value="off">非表示</option>
+            </select>
+          </label>
+          <label style="display:flex; gap:6px; align-items:center">
+            ソート:
+            <select id="sortBy">
+              <option value="code">カード番号順</option>
+              <option value="name">名前（あ→）</option>
+              <option value="costAsc">コスト（昇順）</option>
+              <option value="costDesc">コスト（降順）</option>
+              <option value="atkDesc">ATK（降順）</option>
+              <option value="defDesc">DEF（降順）</option>
+              <option value="product">商品（五十音）</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="filters">
+        <div class="card">
+          <fieldset>
+            <legend>カード名・読み仮名</legend>
+            <label>
+              <div>カード名（部分一致）</div>
+              <input id="qName" type="text" placeholder="例：ワニ、狐 など" />
+            </label>
+            <label>
+              <div>読み仮名（ひら/カナどちらでも）</div>
+              <input id="qReading" type="text" placeholder="例：わに／キツネ など" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>効果テキスト（空白区切りで複数語）</legend>
+            <textarea id="qEffect" placeholder="例：墓地 除外 ドロー など"></textarea>
+          </fieldset>
+
+          <fieldset>
+            <legend>コスト（範囲ではなく値を選択）</legend>
+            <div id="costPills" class="pillbar"></div>
+            <div class="actions" style="margin-top:8px">
+              <button id="btn-cost-clear">コスト選択をクリア</button>
+            </div>
+          </fieldset>
+
+          <div class="row-2">
+            <fieldset>
+              <legend>ATK</legend>
+              <label>最小<input id="atkMin" type="number" min="0" /></label>
+              <label>最大<input id="atkMax" type="number" min="0" /></label>
+            </fieldset>
+            <fieldset>
+              <legend>DEF</legend>
+              <label>最小<input id="defMin" type="number" min="0" /></label>
+              <label>最大<input id="defMax" type="number" min="0" /></label>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="card" id="dynamicFilters">
+          <fieldset style="margin-bottom:12px">
+            <legend>商品（複数選択可）</legend>
+            <div class="actions" style="margin-bottom:8px">
+              <button id="btn-product-toggle">全選択／全解除</button>
+            </div>
+            <div id="productBox" class="row-auto"></div>
+          </fieldset>
+
+          <div class="row-2">
+            <fieldset>
+              <legend>タイプ（複数選択可）</legend>
+              <div id="typeBox" class="row-auto"></div>
+            </fieldset>
+            <fieldset>
+              <legend>種族（複数選択可）</legend>
+              <div id="raceSummary" class="tags"></div>
+              <button type="button" id="btn-race-open">種族を選ぶ</button>
+
+            </fieldset>
+          </div>
+
+          <fieldset style="margin-top:12px">
+            <legend>領土条件（必要個数以上）</legend>
+            <div class="territory-grid">
+              <div class="territory-item"><label>平野</label><input id="need-plain" type="number" min="0" placeholder="0" /></div>
+              <div class="territory-item"><label>山岳</label><input id="need-mountain" type="number" min="0" placeholder="0" /></div>
+              <div class="territory-item"><label>水生</label><input id="need-aqua" type="number" min="0" placeholder="0" /></div>
+              <div class="territory-item"><label>森林</label><input id="need-forest" type="number" min="0" placeholder="0" /></div>
+              <div class="territory-item"><label>夜</label><input id="need-night" type="number" min="0" placeholder="0" /></div>
+              <div class="territory-item"><label>無</label><input id="need-none" type="number" min="0" placeholder="0" /></div>
+            </div>
+            <small style="color:#777">※カードの領土文字列（例：平山水森夜無 の1文字連結）を解析し、各カテゴリの個数が指定値以上であれば一致とみなします。未記載カードは、いずれかの必要数が1以上の場合は不一致として除外します。</small>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding-top: 10px">
+    <div class="results-head">
+      <div id="hitCount">読込中…</div>
+    </div>
+
+    <section id="resultGrid" class="grid" style="margin-top:10px"></section>
+  </main>
+
+  <script>
+    // 文字ユーティリティ（正規表現不使用）
+    function toHalfWidth(s){
+      var out = ""; for(var i=0;i<s.length;i++){ var code = s.charCodeAt(i); if(code>=65281 && code<=65374){ out += String.fromCharCode(code - 65248); } else { out += s[i]; } } return out;
+    }
+    function kataToHira(s){
+      var out = ""; for(var i=0;i<s.length;i++){ var code = s.charCodeAt(i); if(code>=12449 && code<=12534){ out += String.fromCharCode(code - 96); } else { out += s[i]; } } return out;
+    }
+    function collapseSpaces(s){
+        return String(s || "").replace(/[\s\u3000]+/g, " ").trim();
+    }
+
+    function decodeEntities(s){
+      return String(s||'')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+    }
+
+    function normalize(s){
+        s = s==null ? "" : String(s);
+        s = s.toLowerCase();
+        s = toHalfWidth(s);
+        s = kataToHira(s);
+        s = collapseSpaces(s);
+        return s;
+    }
+    function includesNorm(haystack, needle){ if(!needle) return true; if(!haystack) return false; return normalize(haystack).indexOf(normalize(needle)) !== -1; }
+
+    function esc(s){ s = s==null?"":String(s); return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"','&quot;').replaceAll("'","&#39;"); }
+    function parseIntOrNull(v){ var n = parseInt(v, 10); return isFinite(n) ? n : null; }
+
+    // 領土文字 → スロット配列へ変換
+    // 例: "森／夜水無" → [ ['森','夜'], ['水'], ['無'] ]
+    function parseTerritorySlots(str){
+      const s = String(str || "");
+      const SEP = "／"; // 入力はスクレイパで全角に統一済み
+      const TOKENS = new Set(["平","山","水","森","夜","無"]);
+      const slots = [];
+      let cur = [];
+
+      for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+        if (ch === SEP) {
+          // 連続スラッシュは無視
+          continue;
+        }
+        if (TOKENS.has(ch)) {
+          // 次がスラッシュなら同一スロットの選択肢
+          // 直前にトークンがあり、直後に '／' が続くなら同一スロット
+          // それ以外なら新スロット開始
+          const prevIsToken = cur.length > 0;
+          const nextIsSep = s[i+1] === SEP;
+          if (!prevIsToken) {
+            // 新スロット開始
+            cur = [ch];
+            // 次がスラッシュ連続ならそのスロットに続くので続行
+          } else if (s[i-1] === SEP) {
+            // スラッシュを挟んで同一スロットに追加
+            cur.push(ch);
+          } else {
+            // 前がトークンでスラッシュではない → 直前スロットを確定して新開始
+            slots.push(cur);
+            cur = [ch];
+          }
+          // 最後の文字だった場合は確定
+          if (i === s.length - 1) {
+            slots.push(cur);
+            cur = [];
+          } else if (!nextIsSep) {
+            // 次がスラッシュでない → スロット確定
+            slots.push(cur);
+            cur = [];
+          }
+        }
+        // TOKENS 以外は無視（想定外の記号など）
+      }
+      if (cur.length) slots.push(cur);
+      return slots;
+    }
+
+    // 種族の選択状態
+    let ALL_RACES = [];
+    let SELECTED_RACES = new Set();
+    let TEMP_RACES = new Set();
+
+    // 商品
+    const SOURCES = [
+      'cards_sd1.json', // 第1弾デッキ
+      'cards_sd2.json', // 第2弾デッキ
+      'cards_bp1.json', // 種族戦争
+      'cards_bp2.json', // 運命の物語
+      'cards_ryo.json', // 領土
+    ];
+    var RAW = [];
+
+    // 画面表示時のロード処理
+    async function load(){
+      const results = [];
+      for(const url of SOURCES){
+        try{
+          const res = await fetch(url, { cache: 'no-store' });
+          if(!res.ok) throw new Error(url + ' の取得に失敗しました');
+          const arr = await res.json();
+          const fallbackProduct = url.replace(/^.*\/(.+?)\.json$/, '$1');
+          for(const c of arr){
+            if(!c.product) c.product = fallbackProduct;
+            results.push(c);
+          }
+        }catch(e){ console.warn(e.message); }
+        }
+      if(results.length===0){
+        document.getElementById('hitCount').textContent = 'データ読込エラー: JSON が読み込めませんでした';
+        return;
+      }
+      RAW = results;
+      buildDynamicFilters(RAW);
+      buildCostPills(RAW);
+      render();
+    };
+
+    function uniq(arr){ var s = new Set(); var out=[]; for(var i=0;i<arr.length;i++){ var v=arr[i]; if(v!==null && v!==undefined && v!==''){ if(!s.has(v)){ s.add(v); out.push(v); } } } return out; }
+
+    function buildDynamicFilters(data){
+      var products = uniq(data.map(function(x){ return x.product; }));
+      var types = uniq(data.map(function(x){ return x.type; }));
+      var races    = uniq(data.map(function(x){ return x.race; }));
+
+      const productBox = document.getElementById('productBox');
+      productBox.innerHTML = products.map(p => `
+      <label><input type="checkbox" class="f-product" value="${p}"> ${esc(p)}</label>
+      `).join('');
+      productBox.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+
+      const typeBox = document.getElementById('typeBox');
+      typeBox.innerHTML = types.map(t => `
+      <label><input type="checkbox" class="f-type" value="${t}"> ${esc(t)}</label>
+      `).join('');
+
+      // 種族はモーダルで設定
+      ALL_RACES = races.slice().sort(function(a,b){ return (a||'').localeCompare(b||'', 'ja'); });
+      if (SELECTED_RACES.size === 0) { /* 初期は未指定（=すべて対象） */ }
+      updateRaceSummary();
+
+      productBox.addEventListener('change', render);
+      typeBox.addEventListener('change', render);
+      // モーダル起動ボタン
+      const openBtn = document.getElementById('btn-race-open');
+      if (openBtn && !openBtn._bound) {
+        openBtn.addEventListener('click', openRaceModal);
+        openBtn._bound = true;
+      }
+
+      document.getElementById('btn-product-toggle').addEventListener('click', function(){
+        var all = Array.from(productBox.querySelectorAll('input[type="checkbox"]'));
+        var allChecked = all.every(function(cb){ return cb.checked; });
+        all.forEach(function(cb){ cb.checked = !allChecked; });
+        render();
+      });
+    }
+
+    // ===== コスト：値ボタン =====
+    function buildCostPills(data){
+        const numeric = data.map(x => (Number.isFinite(x.cost) ? x.cost : null)).filter(v => v!==null);
+        let costs = [...new Set(numeric)].sort((a,b)=>a-b);
+        if(costs.length === 0){ costs = [0,1,2,3,4,5]; }
+        const max = Math.max(...costs);
+        const full = Array.from({length: max+1}, (_,i)=>i);
+        const wrap = document.getElementById('costPills');
+        wrap.innerHTML = full.map(c => `<span class="pill" data-cost="${c}">${c}</span>`).join('');
+        wrap.addEventListener('click', e => { const t = e.target.closest('.pill'); if(!t) return; t.classList.toggle('active'); render(); });
+        document.getElementById('btn-cost-clear').addEventListener('click', () => { wrap.querySelectorAll('.pill.active').forEach(p => p.classList.remove('active')); render(); });
+    }
+    function getSelectedCosts(){ return [...document.querySelectorAll('#costPills .pill.active')].map(el => parseInt(el.dataset.cost, 10)); }
+
+    function getFilters(){
+      var qName = document.getElementById('qName').value;
+      var qReading = document.getElementById('qReading').value;
+      var qEffect = document.getElementById('qEffect').value;
+      var effectMode = document.getElementById('effectMode').value;
+
+      var atkMin = parseIntOrNull(document.getElementById('atkMin').value);
+      var atkMax = parseIntOrNull(document.getElementById('atkMax').value);
+      var defMin = parseIntOrNull(document.getElementById('defMin').value);
+      var defMax = parseIntOrNull(document.getElementById('defMax').value);
+
+      var need = {
+        plain: parseIntOrNull(document.getElementById('need-plain').value) || 0,
+        mountain: parseIntOrNull(document.getElementById('need-mountain').value) || 0,
+        aqua: parseIntOrNull(document.getElementById('need-aqua').value) || 0,
+        forest: parseIntOrNull(document.getElementById('need-forest').value) || 0,
+        night: parseIntOrNull(document.getElementById('need-night').value) || 0
+      };
+
+      var selectedProducts = Array.from(document.querySelectorAll('.f-product:checked')).map(function(x){ return x.value; });
+      var selectedTypes = Array.from(document.querySelectorAll('.f-type:checked')).map(function(x){ return x.value; });
+      var selectedRaces = Array.from(SELECTED_RACES);
+
+      var sortBy = document.getElementById('sortBy').value;
+      var thumbMode = document.getElementById('thumbMode').value;
+      var costs = getSelectedCosts();
+
+      return { qName:qName, qReading:qReading, qEffect:qEffect, effectMode:effectMode, atkMin:atkMin, atkMax:atkMax, defMin:defMin, defMax:defMax, need:need, selectedProducts:selectedProducts, selectedTypes:selectedTypes, selectedRaces:selectedRaces, sortBy:sortBy, thumbMode:thumbMode, costs:costs };
+    }
+
+    function matchEffect(effectText, query, mode){
+      var eff = normalize(effectText || '');
+      var tokens = normalize(query||'').split(' ').filter(function(x){ return x; });
+      if(tokens.length === 0) return true;
+      if(mode === 'OR'){ for(var i=0;i<tokens.length;i++){ if(eff.indexOf(tokens[i]) !== -1) return true; } return false; }
+      for(var j=0;j<tokens.length;j++){ if(eff.indexOf(tokens[j]) === -1) return false; } return true;
+    }
+
+    // 必要個数 need を、スロット群から満たせるか判定（各スロットは選択肢から1つだけ選べる）
+    function matchTerritory(card, need){
+      // need: { plain, mountain, aqua, forest, night, none }
+      const anyNeed = (need.plain>0)||(need.mountain>0)||(need.aqua>0)||(need.forest>0)||(need.night>0)||(need.none>0);
+      const t = card.territory || "";
+
+      if (!t) return anyNeed ? false : true;
+
+      const slots = parseTerritorySlots(t);
+      if (!anyNeed) return true; // 条件なし
+
+      // 残需要を作る
+      const demand = {
+        平: need.plain|0, 山: need.mountain|0, 水: need.aqua|0,
+        森: need.forest|0, 夜: need.night|0, 無: need.none|0
+      };
+
+      // 一番不足の大きいカテゴリを優先して充足するため、貪欲に割り当て
+      // スロット順に「その時点で需要が最大のものを選ぶ」
+      const order = () => Object.entries(demand).sort((a,b)=>b[1]-a[1]);
+
+      for (const opts of slots) {
+        // 今もっとも不足しているものから見て、取れるなら取る
+        let chosen = null;
+        for (const [key, needCnt] of order()) {
+          if (needCnt > 0 && opts.includes(key)) { chosen = key; break; }
+        }
+        if (chosen) demand[chosen]--;
+        // 需要が0以下でも他のカテゴリを満たすために敢えて別を選びたいケースはあるが、
+        // 需要が残っている限り上の貪欲で優先的に埋めるのが実用的
+      }
+
+      // 全カテゴリの需要が満たせたか
+      return demand.平<=0 && demand.山<=0 && demand.水<=0 && demand.森<=0 && demand.夜<=0 && demand.無<=0;
+    }
+
+    function betweenOrNull(n, min, max){ if(n == null) return false; if(min != null && n < min) return false; if(max != null && n > max) return false; return true; }
+
+    function applyFilters(data, f){
+      var nameQ = normalize(f.qName);
+      var readQ = normalize(f.qReading);
+
+      return data.filter(function(card){
+        if(f.selectedProducts.length && f.selectedProducts.indexOf(card.product) === -1) return false;
+        if(f.selectedTypes.length && f.selectedTypes.indexOf(card.type) === -1) return false;
+        if(f.selectedRaces.length && f.selectedRaces.indexOf(card.race) === -1) return false;
+
+        if(nameQ && !includesNorm(card.name, nameQ)) return false;
+        if(readQ && !includesNorm(card.reading, readQ)) return false;
+
+        if(f.qEffect && !matchEffect(card.effect, f.qEffect, f.effectMode)) return false;
+
+        if(f.costs.length){ if(!(typeof card.cost === 'number' && isFinite(card.cost) && f.costs.indexOf(card.cost) !== -1)) return false; }
+
+        if(f.atkMin != null || f.atkMax != null){ if(!betweenOrNull(card.atk, f.atkMin, f.atkMax)) return false; }
+        if(f.defMin != null || f.defMax != null){ if(!betweenOrNull(card.def, f.defMin, f.defMax)) return false; }
+
+        if(!matchTerritory(card, f.need)) return false;
+        return true;
+      });
+    }
+
+    // 商品のソート順制御用
+    const PRODUCT_ORDER = ['第1弾デッキ','第2弾デッキ','種属戦争','運命の物語','領土'];
+    function productRank(p){ const i = PRODUCT_ORDER.indexOf(p||''); return i === -1 ? 999 : i; }
+    function codeKey(c){
+      const id = c.id || '';
+      const m = id.match(/^([A-Z]+[0-9]*)-(\d{1,})$/); // 例 ACG-001, BP1-012, RYO-003
+      return {
+        prefix: m ? m[1] : '',
+        num: m ? parseInt(m[2],10) : Number.MAX_SAFE_INTEGER
+      };
+    }
+
+    function sortCards(arr, sortBy){
+      var collate = new Intl.Collator('ja');
+      function byNum(a,b,k,desc){ var av = (a[k] != null ? a[k] : -Infinity); var bv = (b[k] != null ? b[k] : -Infinity); return (av - bv) * (desc? -1 : 1); }
+      function byText(a,b,k){ return collate.compare(a[k]||'', b[k]||''); }
+      var cloned = arr.slice();
+      if(sortBy === 'costAsc') cloned.sort(function(a,b){ return byNum(a,b,'cost', false); });
+      else if(sortBy === 'costDesc') cloned.sort(function(a,b){ return byNum(a,b,'cost', true); });
+      else if(sortBy === 'atkDesc') cloned.sort(function(a,b){ return byNum(a,b,'atk', true); });
+      else if(sortBy === 'defDesc') cloned.sort(function(a,b){ return byNum(a,b,'def', true); });
+      else if(sortBy === 'product') cloned.sort(function(a,b){ var t = byText(a,b,'product'); return t || byText(a,b,'name'); });
+      else if(sortBy === 'code') cloned.sort(function(a,b){
+        var ra = productRank(a.product), rb = productRank(b.product);
+        if (ra !== rb) return ra - rb;
+        var ka = codeKey(a), kb = codeKey(b);
+        if (ka.prefix !== kb.prefix) return ka.prefix < kb.prefix ? -1 : 1;
+        if (ka.num !== kb.num) return ka.num - kb.num;
+        return byText(a,b,'name');
+      });
+      else cloned.sort(function(a,b){ return byText(a,b,'name'); });
+      return cloned;
+    }
+
+    function render(){
+      var f = getFilters();
+      var filtered = applyFilters(RAW, f);
+      var items = sortCards(filtered, f.sortBy);
+      document.getElementById('hitCount').textContent = items.length + ' 件ヒット';
+      var grid = document.getElementById('resultGrid');
+      grid.innerHTML = items.map(renderCard).join('');
+    }
+
+    function renderCard(c){
+      var thumbMode = document.getElementById('thumbMode').value;
+      var tags = [];
+      if(c.product) tags.push('<span class="tag">'+esc(c.product)+'</span>');
+      if(c.type) tags.push('<span class="tag">'+esc(c.type)+'</span>');
+      if(c.race) tags.push('<span class="tag">'+esc(c.race)+'</span>');
+      if(typeof c.cost === 'number' && isFinite(c.cost)) tags.push('<span class="tag">Cost '+c.cost+'</span>');
+      if(c.territory) tags.push('<span class="tag">'+esc(c.territory)+'</span>');
+      if(typeof c.atk === 'number' && isFinite(c.atk)) tags.push('<span class="tag">ATK '+c.atk+'</span>');
+      if(typeof c.def === 'number' && isFinite(c.def)) tags.push('<span class="tag">DEF '+c.def+'</span>');
+
+      var thumb = '';
+      if(thumbMode === 'on' && c.imageUrl){
+        thumb = '<a class="thumb" href="'+esc(c.imageUrl)+'" target="_blank" rel="noreferrer noopener">' +
+                '  <img src="'+esc(c.imageUrl)+'" alt="'+esc(c.name)+'" loading="lazy" />' +
+                '</a>';
+      }
+
+      return '<article class="card-item">' +
+             thumb +             '  <div class="meta">' +
+             '    <div class="name">'+esc(c.name||'（名称未設定）')+'</div>' +
+             (c.reading ? '<div class="reading">'+esc(c.reading)+'</div>' : '') +
+             '    <div class="tags">'+tags.join('')+'</div>' +
+             (c.effect ? '<details><summary>効果テキスト</summary><div style="white-space:pre-wrap;">'+esc(decodeEntities(c.effect))+'</div></details>' : '') +
+             '  </div>' +
+             '</article>';
+    }
+
+    function debounce(fn, ms){ var t; return function(){ var args = arguments; clearTimeout(t); t = setTimeout(function(){ fn.apply(null, args); }, ms); }; }
+
+    function bindEvents(){
+      var onChange = debounce(render, 120);
+      var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','effectMode','sortBy','thumbMode','need-plain','need-mountain','need-aqua','need-forest','need-night'];
+      ids.forEach(function(id){ document.getElementById(id).addEventListener('input', onChange); });
+
+      document.getElementById('btn-reset').addEventListener('click', function(){
+        Array.from(document.querySelectorAll('input[type="text"], input[type="number"], textarea')).forEach(function(i){ i.value=''; });
+        document.getElementById('effectMode').value = 'AND';
+        document.getElementById('sortBy').value = 'name';
+        document.getElementById('thumbMode').value = 'on';
+        Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = true; });
+        Array.from(document.querySelectorAll('.f-type, .f-race')).forEach(function(cb){ cb.checked = false; });
+        Array.from(document.querySelectorAll('#costPills .pill.active')).forEach(function(p){ p.classList.remove('active'); });
+        render();
+      });
+    }
+
+    // 種族更新
+    function updateRaceSummary(){
+      const box = document.getElementById('raceSummary');
+      if (!box) return;
+      const arr = Array.from(SELECTED_RACES);
+      if (arr.length === 0) {
+        box.innerHTML = '<span class="tag">（未指定）</span>';
+      } else {
+        box.innerHTML = arr.map(r => `<span class="tag">${esc(r)}</span>`).join('');
+      }
+    }
+    // 種族設定モーダルオープン
+    function openRaceModal(){
+      TEMP_RACES = new Set(SELECTED_RACES); // 現在値をコピー
+      const list = document.getElementById('raceModalList');
+      list.innerHTML = ALL_RACES.map(r => {
+        const checked = TEMP_RACES.has(r) ? 'checked' : '';
+        return `<label><input type="checkbox" class="modal-race" value="${r}" ${checked}> ${esc(r)}</label>`;
+      }).join('');
+
+      // 変更監視（toggle）
+      list.onclick = function(e){
+        const cb = e.target.closest('input.modal-race');
+        if (!cb) return;
+        if (cb.checked) TEMP_RACES.add(cb.value); else TEMP_RACES.delete(cb.value);
+        updateRaceSelectAllState(); // 全選択チェックの制御
+      };
+
+      // ボタン
+      const modal = document.getElementById('raceModal');
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden','false');
+
+      const onCancel = () => closeRaceModal(false);
+      const onApply  = () => closeRaceModal(true);
+
+      document.getElementById('btn-race-cancel').onclick = onCancel;
+      document.getElementById('btn-race-apply').onclick  = onApply;
+      // 背景クリックでキャンセル扱い
+      modal.querySelector('.modal-backdrop').onclick = onCancel;
+      // 全選択チェック制御
+      const selectAll = document.getElementById('raceModalSelectAll');
+      selectAll.checked = TEMP_RACES.size === ALL_RACES.length;
+      updateRaceSelectAllState(); // 初期表示時に正しい状態にする
+      selectAll.onchange = (e) => {
+        const on = e.target.checked;
+        const checkboxes = list.querySelectorAll('input.modal-race');
+        checkboxes.forEach(cb => {
+          cb.checked = on;
+          if (on) TEMP_RACES.add(cb.value);
+          else TEMP_RACES.delete(cb.value);
+        });
+        updateRaceSelectAllState(); // 一括ON/OFF後も状態反映
+      };
+    }
+    // 種族設定モーダルクローズ
+    function closeRaceModal(apply){
+      const modal = document.getElementById('raceModal');
+      if (apply) {
+        SELECTED_RACES = new Set(TEMP_RACES); // コミット
+        updateRaceSummary();
+        render();
+      }
+      // 破棄
+      TEMP_RACES = new Set();
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden','true');
+    }
+    // 全選択チェックの制御
+    function updateRaceSelectAllState(){
+      const selectAll = document.getElementById('raceModalSelectAll');
+      if (!selectAll) return;
+      const total = ALL_RACES.length || 0;
+      const sel = TEMP_RACES.size || 0;
+      selectAll.checked = total > 0 && sel === total;
+      selectAll.indeterminate = sel > 0 && sel < total;
+    }
+
+    bindEvents();
+    load();
+  </script>
+<!-- 種族設定用モーダル ここから -->
+<div id="raceModal" class="modal hidden" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="raceModalTitle">
+    <header class="modal-header">
+      <h2 id="raceModalTitle">種族を選ぶ</h2>
+      <label><input type="checkbox" id="raceModalSelectAll"> すべて選択 / 解除</label>
+    </header>
+    <div id="raceModalList" class="modal-body"></div>
+    <footer class="modal-footer">
+      <button id="btn-race-cancel">キャンセル</button>
+      <button id="btn-race-apply">設定する</button>
+    </footer>
+  </div>
+</div>
+<!-- 種族設定用モーダル ここまで -->
+</body>
+</html>
