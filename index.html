@@ -522,7 +522,7 @@
       document.getElementById('btn-reset').addEventListener('click', function(){
         Array.from(document.querySelectorAll('input[type="text"], input[type="number"], textarea')).forEach(function(i){ i.value=''; });
         document.getElementById('effectMode').value = 'AND';
-        document.getElementById('sortBy').value = 'name';
+        document.getElementById('sortBy').value = 'code';
         document.getElementById('thumbMode').value = 'on';
         Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = true; });
         Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = true; });
