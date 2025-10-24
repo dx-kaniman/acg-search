@@ -2,6 +2,7 @@
   {
     "id": "BP2-001",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "無籍の先導者",
     "reading": "むせきのせんどうしゃ",
     "cost": 1,
@@ -16,6 +17,7 @@
   {
     "id": "BP2-002",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "漂う海月",
     "reading": "ただようくらげ",
     "cost": 1,
@@ -30,6 +32,7 @@
   {
     "id": "BP2-003",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "勇気の放浪者",
     "reading": "ゆうきのほうろうしゃ",
     "cost": 2,
@@ -44,6 +47,7 @@
   {
     "id": "BP2-004",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "決意の放浪者",
     "reading": "けついのほうろうしゃ",
     "cost": 2,
@@ -58,6 +62,7 @@
   {
     "id": "BP2-005",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "信念の放浪者",
     "reading": "しんねんのほうろうしゃ",
     "cost": 2,
@@ -72,6 +77,7 @@
   {
     "id": "BP2-006",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "闘志の放浪者",
     "reading": "とうしのほうろうしゃ",
     "cost": 2,
@@ -86,6 +92,7 @@
   {
     "id": "BP2-007",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "無国籍国家",
     "reading": "むこくせきこっか",
     "cost": 0,
@@ -100,6 +107,7 @@
   {
     "id": "BP2-008",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "放浪者の礎",
     "reading": "ほうろうしゃのいしずえ",
     "cost": 1,
@@ -114,6 +122,7 @@
   {
     "id": "BP2-009",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "乳牛",
     "reading": "にゅうぎゅう",
     "cost": 0,
@@ -128,6 +137,7 @@
   {
     "id": "BP2-010",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "牛の従者",
     "reading": "うしのじゅうしゃ",
     "cost": 1,
@@ -142,6 +152,7 @@
   {
     "id": "BP2-011",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "蓄積する雄牛",
     "reading": "ちくせきするおうし",
     "cost": 1,
@@ -156,6 +167,7 @@
   {
     "id": "BP2-012",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "慈愛の母牛",
     "reading": "じあいのははうし",
     "cost": 1,
@@ -170,6 +182,7 @@
   {
     "id": "BP2-013",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "老いた語り部",
     "reading": "おいたかたりべ",
     "cost": 2,
@@ -184,6 +197,7 @@
   {
     "id": "BP2-014",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "牛舎の守衛",
     "reading": "ぎゅうしゃのしゅえい",
     "cost": 3,
@@ -198,6 +212,7 @@
   {
     "id": "BP2-015",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "荒れ狂う猛牛",
     "reading": "あれくるうもうぎゅう",
     "cost": 6,
@@ -212,6 +227,7 @@
   {
     "id": "BP2-016",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "岩場の守備隊",
     "reading": "いわばのしゅびたい",
     "cost": 0,
@@ -226,6 +242,7 @@
   {
     "id": "BP2-017",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "岩場の斥候兵",
     "reading": "いわばのせっこうへい",
     "cost": 1,
@@ -240,6 +257,7 @@
   {
     "id": "BP2-018",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "崖下りの天才",
     "reading": "がけくだりのてんさい",
     "cost": 1,
@@ -254,6 +272,7 @@
   {
     "id": "BP2-019",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "国境警備隊長",
     "reading": "こっきょうけいびたいちょう",
     "cost": 2,
@@ -268,6 +287,7 @@
   {
     "id": "BP2-020",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "アルマジロ王",
     "reading": "あるまじろおう",
     "cost": 3,
@@ -282,6 +302,7 @@
   {
     "id": "BP2-021",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "初演の仔",
     "reading": "しょえんのこ",
     "cost": 1,
@@ -296,6 +317,7 @@
   {
     "id": "BP2-022",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "熱演のドルフィン",
     "reading": "ねつえんのどるふぃん",
     "cost": 2,
@@ -310,6 +332,7 @@
   {
     "id": "BP2-023",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "白き海精",
     "reading": "しろきかいせい",
     "cost": 3,
@@ -324,6 +347,7 @@
   {
     "id": "BP2-024",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "海洋の楽園",
     "reading": "かいようのらくえん",
     "cost": 1,
@@ -338,6 +362,7 @@
   {
     "id": "BP2-025",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "熱烈な再演",
     "reading": "ねつれつなさいえん",
     "cost": 1,
@@ -352,6 +377,7 @@
   {
     "id": "BP2-026",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "海中の見真似",
     "reading": "かいちゅうのみまね",
     "cost": 1,
@@ -366,6 +392,7 @@
   {
     "id": "BP2-027",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "海への誘い",
     "reading": "うみへのさそい",
     "cost": 3,
@@ -380,6 +407,7 @@
   {
     "id": "BP2-028",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "死の兎",
     "reading": "しのうさぎ",
     "cost": 1,
@@ -394,6 +422,7 @@
   {
     "id": "BP2-029",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "月姫",
     "reading": "つきひめ",
     "cost": 0,
@@ -408,6 +437,7 @@
   {
     "id": "BP2-030",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "月姫の従者",
     "reading": "つきひめのじゅうしゃ",
     "cost": 1,
@@ -422,6 +452,7 @@
   {
     "id": "BP2-031",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "月の門番",
     "reading": "つきのもんばん",
     "cost": 3,
@@ -436,6 +467,7 @@
   {
     "id": "BP2-032",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "月の使者",
     "reading": "つきのししゃ",
     "cost": 2,
@@ -450,6 +482,7 @@
   {
     "id": "BP2-033",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "月を駆ける兎",
     "reading": "つきをかけるうさぎ",
     "cost": 2,
@@ -464,6 +497,7 @@
   {
     "id": "BP2-034",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "水面の故郷",
     "reading": "みなものこきょう",
     "cost": 1,
@@ -478,6 +512,7 @@
   {
     "id": "BP2-035",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "月姫の計略",
     "reading": "つきひめのけいりゃく",
     "cost": 0,
@@ -492,6 +527,7 @@
   {
     "id": "BP2-036",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "天命の門出",
     "reading": "てんめいのかどで",
     "cost": 1,
@@ -506,6 +542,7 @@
   {
     "id": "BP2-037",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "宿命の旅路",
     "reading": "しゅくめいのたびじ",
     "cost": 1,
@@ -520,6 +557,7 @@
   {
     "id": "BP2-038",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "運命の帰郷",
     "reading": "うんめいのききょう",
     "cost": 1,
@@ -534,6 +572,7 @@
   {
     "id": "BP2-039",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "不屈の旅人",
     "reading": "ふくつのたびびと",
     "cost": 3,
@@ -548,6 +587,7 @@
   {
     "id": "BP2-040",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "不壊の相棒",
     "reading": "ふえのあいぼう",
     "cost": 3,
@@ -562,6 +602,7 @@
   {
     "id": "BP2-041",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "不滅の絶景",
     "reading": "ふめつのぜっけい",
     "cost": 3,
@@ -576,6 +617,7 @@
   {
     "id": "BP2-042",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "悲恋哀々松崎心中",
     "reading": "ひれんあいあいまつざきしんじゅう",
     "cost": 1,
@@ -590,6 +632,7 @@
   {
     "id": "BP2-043",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "冥府からの脱出",
     "reading": "めいふからのだっしゅつ",
     "cost": 3,
@@ -604,6 +647,7 @@
   {
     "id": "BP2-044",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "百戦練磨の獅子",
     "reading": "ひゃくせんれんまのしし",
     "cost": 5,
@@ -618,6 +662,7 @@
   {
     "id": "BP2-045",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "壊滅的猛禽",
     "reading": "かいめつてきもうきん",
     "cost": 5,
@@ -632,6 +677,7 @@
   {
     "id": "BP2-046",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "ギガ・クロコ",
     "reading": "ぎがくろこ",
     "cost": 5,
@@ -646,6 +692,7 @@
   {
     "id": "BP2-047",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "伝説の勇者",
     "reading": "でんせつのゆうしゃ",
     "cost": 4,
@@ -660,6 +707,7 @@
   {
     "id": "BP2-048",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "炎猿",
     "reading": "えんえん",
     "cost": 1,
@@ -674,6 +722,7 @@
   {
     "id": "BP2-049",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "爆炎",
     "reading": "ばくえん",
     "cost": 1,
@@ -688,6 +737,7 @@
   {
     "id": "BP2-050",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "火種",
     "reading": "ひだね",
     "cost": 0,
@@ -702,6 +752,7 @@
   {
     "id": "BP2-051",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "万雷",
     "reading": "ばんらい",
     "cost": 2,
@@ -716,6 +767,7 @@
   {
     "id": "BP2-052",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "開闢の獅子",
     "reading": "かいびゃくのしし",
     "cost": 1,
@@ -730,6 +782,7 @@
   {
     "id": "BP2-053",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "鋭い眼光の狩人",
     "reading": "するどいがんこうのかりうど",
     "cost": 1,
@@ -744,6 +797,7 @@
   {
     "id": "BP2-054",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "足を取る大沼",
     "reading": "あしをとるおおぬま",
     "cost": 1,
@@ -758,6 +812,7 @@
   {
     "id": "BP2-055",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "静寂の石像",
     "reading": "せいじゃくのせきぞう",
     "cost": 2,
@@ -772,6 +827,7 @@
   {
     "id": "BP2-056",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "再会",
     "reading": "さいかい",
     "cost": 2,
@@ -786,6 +842,7 @@
   {
     "id": "BP2-057",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "孔雀の魅了",
     "reading": "くじゃくのみりょう",
     "cost": 3,
@@ -800,6 +857,7 @@
   {
     "id": "BP2-058",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "先駆けの白馬",
     "reading": "さきがけのはくば",
     "cost": 1,
@@ -814,6 +872,7 @@
   {
     "id": "BP2-059",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "統治する猟犬",
     "reading": "とうちするりょうけん",
     "cost": 1,
@@ -828,6 +887,7 @@
   {
     "id": "BP2-060",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "燃え山羊",
     "reading": "もえやぎ",
     "cost": 2,
@@ -842,6 +902,7 @@
   {
     "id": "BP2-061",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "灼熱の石像",
     "reading": "しゃくねつのせきぞう",
     "cost": 2,
@@ -856,6 +917,7 @@
   {
     "id": "BP2-062",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "連単炎",
     "reading": "れんたんえん",
     "cost": 2,
@@ -870,6 +932,7 @@
   {
     "id": "BP2-063",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "葬祭",
     "reading": "そうさい",
     "cost": 1,
@@ -884,6 +947,7 @@
   {
     "id": "BP2-064",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "未来視",
     "reading": "みらいし",
     "cost": 1,
@@ -898,6 +962,7 @@
   {
     "id": "BP2-065",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "ウルフハウル",
     "reading": "うるふはうる",
     "cost": 3,
@@ -912,6 +977,7 @@
   {
     "id": "BP2-066",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "掴み取る触手",
     "reading": "つかみとるしょくしゅ",
     "cost": 1,
@@ -926,6 +992,7 @@
   {
     "id": "BP2-067",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "海中のギャング",
     "reading": "かいちゅうのぎゃんぐ",
     "cost": 7,
@@ -940,6 +1007,7 @@
   {
     "id": "BP2-068",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "太古の石像",
     "reading": "たいこのせきぞう",
     "cost": 2,
@@ -954,6 +1022,7 @@
   {
     "id": "BP2-069",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "枯渇した餌場",
     "reading": "こかつしたえさば",
     "cost": 1,
@@ -968,6 +1037,7 @@
   {
     "id": "BP2-070",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "二別流",
     "reading": "にべつりゅう",
     "cost": 2,
@@ -982,6 +1052,7 @@
   {
     "id": "BP2-071",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "降雪",
     "reading": "こうせつ",
     "cost": 1,
@@ -996,6 +1067,7 @@
   {
     "id": "BP2-072",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "食事する牡鹿",
     "reading": "しょくじするおじか",
     "cost": 1,
@@ -1010,6 +1082,7 @@
   {
     "id": "BP2-073",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "巨大化する大猪",
     "reading": "きょだいかするおおいのしし",
     "cost": 2,
@@ -1024,6 +1097,7 @@
   {
     "id": "BP2-074",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "脈動の森",
     "reading": "みゃくどうのもり",
     "cost": 1,
@@ -1038,6 +1112,7 @@
   {
     "id": "BP2-075",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "狩猟の石像",
     "reading": "しゅりょうのせきぞう",
     "cost": 2,
@@ -1052,6 +1127,7 @@
   {
     "id": "BP2-076",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "狸舞",
     "reading": "たぬきまい",
     "cost": 3,
@@ -1066,6 +1142,7 @@
   {
     "id": "BP2-077",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "黒山羊",
     "reading": "くろやぎ",
     "cost": 2,
@@ -1080,6 +1157,7 @@
   {
     "id": "BP2-078",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "掘削機",
     "reading": "くっさくき",
     "cost": 0,
@@ -1094,6 +1172,7 @@
   {
     "id": "BP2-079",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "記憶の探査",
     "reading": "きおくのたんさ",
     "cost": 0,
@@ -1108,6 +1187,7 @@
   {
     "id": "BP2-080",
     "product": "運命の物語",
+    "sub_product": null,
     "name": "対空掃射",
     "reading": "たいくうそうしゃ",
     "cost": 3,

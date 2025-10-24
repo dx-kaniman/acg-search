@@ -2,6 +2,7 @@
   {
     "id": "BP1-001",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "女王蜂",
     "reading": "じょおうばち",
     "cost": 3,
@@ -16,6 +17,7 @@
   {
     "id": "BP1-002",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "先鋒蜂",
     "reading": "せんぽうばち",
     "cost": 1,
@@ -30,6 +32,7 @@
   {
     "id": "BP1-003",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "兵隊蜂",
     "reading": "へいたいばち",
     "cost": 2,
@@ -44,6 +47,7 @@
   {
     "id": "BP1-004",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "働き蜂",
     "reading": "はたらきばち",
     "cost": 1,
@@ -58,6 +62,7 @@
   {
     "id": "BP1-005",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "門番蜂",
     "reading": "もんばんばち",
     "cost": 1,
@@ -72,6 +77,7 @@
   {
     "id": "BP1-006",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "子育蜂",
     "reading": "こそだてばち",
     "cost": 1,
@@ -86,6 +92,7 @@
   {
     "id": "BP1-007",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "掃除蜂",
     "reading": "そうじばち",
     "cost": 1,
@@ -100,6 +107,7 @@
   {
     "id": "BP1-008",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "子蜂",
     "reading": "こばち",
     "cost": 1,
@@ -114,6 +122,7 @@
   {
     "id": "BP1-009",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蜂の巣",
     "reading": "はちのす",
     "cost": 0,
@@ -128,6 +137,7 @@
   {
     "id": "BP1-010",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蜂の巣作り",
     "reading": "はちのすづくり",
     "cost": 0,
@@ -142,6 +152,7 @@
   {
     "id": "BP1-011",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蜂蜜溜まり",
     "reading": "はちみつだまり",
     "cost": 1,
@@ -156,6 +167,7 @@
   {
     "id": "BP1-012",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "女王蟻",
     "reading": "じょおうあり",
     "cost": 0,
@@ -170,6 +182,7 @@
   {
     "id": "BP1-013",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "兵隊蟻",
     "reading": "へいたいあり",
     "cost": 1,
@@ -184,6 +197,7 @@
   {
     "id": "BP1-014",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "補給蟻",
     "reading": "ほきゅうあり",
     "cost": 1,
@@ -198,6 +212,7 @@
   {
     "id": "BP1-015",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "働き蟻",
     "reading": "はたらきあり",
     "cost": 1,
@@ -212,6 +227,7 @@
   {
     "id": "BP1-016",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "軍隊蟻",
     "reading": "ぐんたいあり",
     "cost": 2,
@@ -226,6 +242,7 @@
   {
     "id": "BP1-017",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "刺針蟻",
     "reading": "ししんあり",
     "cost": 2,
@@ -240,6 +257,7 @@
   {
     "id": "BP1-018",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蟻の巣",
     "reading": "ありのす",
     "cost": 0,
@@ -254,6 +272,7 @@
   {
     "id": "BP1-019",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "餌道",
     "reading": "えさみち",
     "cost": 1,
@@ -268,6 +287,7 @@
   {
     "id": "BP1-020",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蟻道",
     "reading": "ありみち",
     "cost": 1,
@@ -282,6 +302,7 @@
   {
     "id": "BP1-021",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蟻塚",
     "reading": "ありづか",
     "cost": 2,
@@ -296,6 +317,7 @@
   {
     "id": "BP1-022",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蟻壁",
     "reading": "ありかべ",
     "cost": 2,
@@ -310,6 +332,7 @@
   {
     "id": "BP1-023",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "見狐",
     "reading": "みきつね",
     "cost": 1,
@@ -324,6 +347,7 @@
   {
     "id": "BP1-024",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "双子狐",
     "reading": "ふたごきつね",
     "cost": 1,
@@ -338,6 +362,7 @@
   {
     "id": "BP1-025",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "置狐",
     "reading": "おきつね",
     "cost": 1,
@@ -352,6 +377,7 @@
   {
     "id": "BP1-026",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "組狐",
     "reading": "くみきつね",
     "cost": 1,
@@ -366,6 +392,7 @@
   {
     "id": "BP1-027",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "狐葉",
     "reading": "きつねは",
     "cost": 1,
@@ -380,6 +407,7 @@
   {
     "id": "BP1-028",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "化狐",
     "reading": "ばけきつね",
     "cost": 2,
@@ -394,6 +422,7 @@
   {
     "id": "BP1-029",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "九尾",
     "reading": "きゅうび",
     "cost": 6,
@@ -408,6 +437,7 @@
   {
     "id": "BP1-030",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "狐の隠里",
     "reading": "きつねのかくれざと",
     "cost": 1,
@@ -422,6 +452,7 @@
   {
     "id": "BP1-031",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "妖狐の変化",
     "reading": "ようこのへんげ",
     "cost": 4,
@@ -436,6 +467,7 @@
   {
     "id": "BP1-032",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "妖狐の祭壇",
     "reading": "ようこのさいだん",
     "cost": 4,
@@ -450,6 +482,7 @@
   {
     "id": "BP1-033",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "子モグラ",
     "reading": "こもぐら",
     "cost": 0,
@@ -464,6 +497,7 @@
   {
     "id": "BP1-034",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "墓地モグラ",
     "reading": "ぼちもぐら",
     "cost": 1,
@@ -478,6 +512,7 @@
   {
     "id": "BP1-035",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "狂乱モグラ",
     "reading": "きょうらんもぐら",
     "cost": 1,
@@ -492,6 +527,7 @@
   {
     "id": "BP1-036",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "追従モグラ",
     "reading": "ついじゅうもぐら",
     "cost": 1,
@@ -506,6 +542,7 @@
   {
     "id": "BP1-037",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "総代モグラ",
     "reading": "そうだいもぐら",
     "cost": 3,
@@ -520,6 +557,7 @@
   {
     "id": "BP1-038",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "深淵の盗掘モグラ",
     "reading": "しんえんのとうくつもぐら",
     "cost": 3,
@@ -534,6 +572,7 @@
   {
     "id": "BP1-039",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "簡易祭壇",
     "reading": "かんいさいだん",
     "cost": 2,
@@ -548,6 +587,7 @@
   {
     "id": "BP1-040",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "不法侵入禁止区",
     "reading": "ふほうしんにゅうきんしく",
     "cost": 2,
@@ -562,6 +602,7 @@
   {
     "id": "BP1-041",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "救助する森狼",
     "reading": "きゅうじょするもりおおかみ",
     "cost": 3,
@@ -576,6 +617,7 @@
   {
     "id": "BP1-042",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "軍医ヘビ",
     "reading": "ぐんいへび",
     "cost": 1,
@@ -590,6 +632,7 @@
   {
     "id": "BP1-043",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "守備隊長タートル",
     "reading": "しゅびたいちょうたーとる",
     "cost": 0,
@@ -604,6 +647,7 @@
   {
     "id": "BP1-044",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "補給兵ハムスター",
     "reading": "ほきゅうへいはむすたー",
     "cost": 1,
@@ -618,6 +662,7 @@
   {
     "id": "BP1-045",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "斥候ハゲワシ",
     "reading": "せっこうはげわし",
     "cost": 1,
@@ -632,6 +677,7 @@
   {
     "id": "BP1-046",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "攻撃隊長ラーテル",
     "reading": "こうげきたいちょうらーてる",
     "cost": 2,
@@ -646,6 +692,7 @@
   {
     "id": "BP1-047",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "工兵カバ",
     "reading": "こうへいかば",
     "cost": 2,
@@ -660,6 +707,7 @@
   {
     "id": "BP1-048",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "師団長ライノ",
     "reading": "しだんちょうらいの",
     "cost": 3,
@@ -674,6 +722,7 @@
   {
     "id": "BP1-049",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "無欠の大将ライノ",
     "reading": "むけつのたいしょうらいの",
     "cost": 9,
@@ -688,6 +737,7 @@
   {
     "id": "BP1-050",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "英雄の参戦",
     "reading": "えいゆうのさんせん",
     "cost": 3,
@@ -702,6 +752,7 @@
   {
     "id": "BP1-051",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "晩成の勇者",
     "reading": "ばんせいのゆうしゃ",
     "cost": 2,
@@ -716,6 +767,7 @@
   {
     "id": "BP1-052",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "蹂躙の勇者",
     "reading": "じゅうりんのゆうしゃ",
     "cost": 4,
@@ -730,6 +782,7 @@
   {
     "id": "BP1-053",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "献身の母象",
     "reading": "けんしんのははぞう",
     "cost": 1,
@@ -744,6 +797,7 @@
   {
     "id": "BP1-054",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "象の教育場",
     "reading": "ぞうのきょういくば",
     "cost": 1,
@@ -758,6 +812,7 @@
   {
     "id": "BP1-055",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "皇后アリゲーター",
     "reading": "こうごうありげーたー",
     "cost": 2,
@@ -772,6 +827,7 @@
   {
     "id": "BP1-056",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "帝王の子",
     "reading": "ていおうのこ",
     "cost": 1,
@@ -786,6 +842,7 @@
   {
     "id": "BP1-057",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "ヒトコブラクダ",
     "reading": "ひとこぶらくだ",
     "cost": 2,
@@ -800,6 +857,7 @@
   {
     "id": "BP1-058",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "フタコブラクダ",
     "reading": "ふたこぶらくだ",
     "cost": 3,
@@ -814,6 +872,7 @@
   {
     "id": "BP1-059",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "母にゃんこ",
     "reading": "ははにゃんこ",
     "cost": 3,
@@ -828,6 +887,7 @@
   {
     "id": "BP1-060",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "子にゃんこ",
     "reading": "こにゃんこ",
     "cost": 1,
@@ -842,6 +902,7 @@
   {
     "id": "BP1-061",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "キリンの背比べ",
     "reading": "きりんのせくらべ",
     "cost": 2,
@@ -856,6 +917,7 @@
   {
     "id": "BP1-062",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "治癒亀",
     "reading": "ちゆかめ",
     "cost": 2,
@@ -870,6 +932,7 @@
   {
     "id": "BP1-063",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "危険な突進",
     "reading": "きけんなとっしん",
     "cost": 2,
@@ -884,6 +947,7 @@
   {
     "id": "BP1-064",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "焦土化",
     "reading": "しょうどか",
     "cost": 2,
@@ -898,6 +962,7 @@
   {
     "id": "BP1-065",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "赤猫",
     "reading": "あかねこ",
     "cost": 1,
@@ -912,6 +977,7 @@
   {
     "id": "BP1-066",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "小さき破壊者",
     "reading": "ちいさきはかいしゃ",
     "cost": 1,
@@ -926,6 +992,7 @@
   {
     "id": "BP1-067",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "猫騙し",
     "reading": "ねこだまし",
     "cost": 1,
@@ -940,6 +1007,7 @@
   {
     "id": "BP1-068",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "熱水噴出孔",
     "reading": "ねっすいふんしゅつこう",
     "cost": 1,
@@ -954,6 +1022,7 @@
   {
     "id": "BP1-069",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "土砂崩れ",
     "reading": "どしゃくずれ",
     "cost": 2,
@@ -968,6 +1037,7 @@
   {
     "id": "BP1-070",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "水辺の騙し屋",
     "reading": "みずべのだましや",
     "cost": 1,
@@ -982,6 +1052,7 @@
   {
     "id": "BP1-071",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "水辺の働き屋",
     "reading": "みずべのはたらきや",
     "cost": 1,
@@ -996,6 +1067,7 @@
   {
     "id": "BP1-072",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "水辺の王さま",
     "reading": "みずべのおうさま",
     "cost": 3,
@@ -1010,6 +1082,7 @@
   {
     "id": "BP1-073",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "上達",
     "reading": "じょうたつ",
     "cost": 0,
@@ -1024,6 +1097,7 @@
   {
     "id": "BP1-074",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "波戻し",
     "reading": "なみもどし",
     "cost": 0,
@@ -1038,6 +1112,7 @@
   {
     "id": "BP1-075",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "潮騒",
     "reading": "しおさい",
     "cost": 1,
@@ -1052,6 +1127,7 @@
   {
     "id": "BP1-076",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "境界の選定",
     "reading": "きょうかいのせんてい",
     "cost": 1,
@@ -1066,6 +1142,7 @@
   {
     "id": "BP1-077",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "倒木投げ",
     "reading": "とうぼくなげ",
     "cost": 1,
@@ -1080,6 +1157,7 @@
   {
     "id": "BP1-078",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "賄賂ある検閲所",
     "reading": "わいろあるけんえつじょ",
     "cost": 1,
@@ -1094,6 +1172,7 @@
   {
     "id": "BP1-079",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "牙城",
     "reading": "がじょう",
     "cost": 2,
@@ -1108,6 +1187,7 @@
   {
     "id": "BP1-080",
     "product": "種族戦争",
+    "sub_product": null,
     "name": "帝王クロコダイル",
     "reading": "ていおうくろこだいる",
     "cost": 4,

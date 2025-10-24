@@ -2,6 +2,7 @@
   {
     "id": "RYO-001",
     "product": "領土",
+    "sub_product": null,
     "name": "平野",
     "reading": "へいや",
     "cost": null,
@@ -16,6 +17,7 @@
   {
     "id": "RYO-002",
     "product": "領土",
+    "sub_product": null,
     "name": "山岳",
     "reading": "さんがく",
     "cost": null,
@@ -30,6 +32,7 @@
   {
     "id": "RYO-003",
     "product": "領土",
+    "sub_product": null,
     "name": "水生",
     "reading": "すいせい",
     "cost": null,
@@ -44,6 +47,7 @@
   {
     "id": "RYO-004",
     "product": "領土",
+    "sub_product": null,
     "name": "森林",
     "reading": "しんりん",
     "cost": null,
@@ -58,6 +62,7 @@
   {
     "id": "RYO-005",
     "product": "領土",
+    "sub_product": null,
     "name": "払暁の荒野",
     "reading": "ふつぎょうのこうや",
     "cost": null,
@@ -72,6 +77,7 @@
   {
     "id": "RYO-006",
     "product": "領土",
+    "sub_product": null,
     "name": "夜明けの山脈",
     "reading": "よあけのさんみゃく",
     "cost": null,
@@ -86,6 +92,7 @@
   {
     "id": "RYO-007",
     "product": "領土",
+    "sub_product": null,
     "name": "朝焼けの海",
     "reading": "あさやけのうみ",
     "cost": null,
@@ -100,6 +107,7 @@
   {
     "id": "RYO-008",
     "product": "領土",
+    "sub_product": null,
     "name": "目覚めの森",
     "reading": "めざめのもり",
     "cost": null,
@@ -114,6 +122,7 @@
   {
     "id": "RYO-009",
     "product": "領土",
+    "sub_product": null,
     "name": "平原の櫓",
     "reading": "へいげんのやぐら",
     "cost": null,
@@ -128,6 +137,7 @@
   {
     "id": "RYO-010",
     "product": "領土",
+    "sub_product": null,
     "name": "山脈の頂",
     "reading": "さんみゃくのいただき",
     "cost": null,
@@ -142,6 +152,7 @@
   {
     "id": "RYO-011",
     "product": "領土",
+    "sub_product": null,
     "name": "彼方の水平線",
     "reading": "かなたのすいへいせん",
     "cost": null,
@@ -156,6 +167,7 @@
   {
     "id": "RYO-012",
     "product": "領土",
+    "sub_product": null,
     "name": "森の中の大樹",
     "reading": "もりのなかのたいじゅ",
     "cost": null,
@@ -170,6 +182,7 @@
   {
     "id": "RYO-013",
     "product": "領土",
+    "sub_product": null,
     "name": "砂丘",
     "reading": "さきゅう",
     "cost": null,
@@ -184,6 +197,7 @@
   {
     "id": "RYO-014",
     "product": "領土",
+    "sub_product": null,
     "name": "湿原",
     "reading": "しつげん",
     "cost": null,
@@ -198,6 +212,7 @@
   {
     "id": "RYO-015",
     "product": "領土",
+    "sub_product": null,
     "name": "樹海",
     "reading": "じゅかい",
     "cost": null,
@@ -212,6 +227,7 @@
   {
     "id": "RYO-016",
     "product": "領土",
+    "sub_product": null,
     "name": "渓谷",
     "reading": "けいこく",
     "cost": null,
@@ -226,6 +242,7 @@
   {
     "id": "RYO-017",
     "product": "領土",
+    "sub_product": null,
     "name": "山林",
     "reading": "さんりん",
     "cost": null,
@@ -240,6 +257,7 @@
   {
     "id": "RYO-018",
     "product": "領土",
+    "sub_product": null,
     "name": "沼地",
     "reading": "ぬまち",
     "cost": null,

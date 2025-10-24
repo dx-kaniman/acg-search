@@ -2,6 +2,7 @@
   {
     "id": "ACG-091",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "少将バッファロー",
     "reading": "しょうしょうばっふぁろー",
     "cost": 3,
@@ -16,6 +17,7 @@
   {
     "id": "ACG-092",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "隻腕の大将バッファロー",
     "reading": "せきわんのたいしょうばっふぁろー",
     "cost": 6,
@@ -30,6 +32,7 @@
   {
     "id": "ACG-093",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "上官中将バッファロー",
     "reading": "じょうかんちゅうじょうばっふぁろー",
     "cost": 2,
@@ -44,6 +47,7 @@
   {
     "id": "ACG-094",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "勲章持ちリカオン",
     "reading": "くんしょうもちりかおん",
     "cost": 0,
@@ -58,6 +62,7 @@
   {
     "id": "ACG-095",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "激情のダチョウ",
     "reading": "げきじょうのだちょう",
     "cost": 1,
@@ -72,6 +77,7 @@
   {
     "id": "ACG-096",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "大隊のダチョウ",
     "reading": "だいたいのだちょう",
     "cost": 2,
@@ -86,6 +92,7 @@
   {
     "id": "ACG-097",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "補給クマ",
     "reading": "ほきゅうくま",
     "cost": 1,
@@ -100,6 +107,7 @@
   {
     "id": "ACG-098",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "灼熱の風",
     "reading": "しゃくねつのかぜ",
     "cost": 0,
@@ -114,6 +122,7 @@
   {
     "id": "ACG-099",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "襲撃",
     "reading": "しゅうげき",
     "cost": 1,
@@ -128,6 +137,7 @@
   {
     "id": "ACG-100",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "呪われた勲章",
     "reading": "のろわれたくんしょう",
     "cost": 0,
@@ -142,6 +152,7 @@
   {
     "id": "ACG-101",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "昇格勲章",
     "reading": "しょうかくくんしょう",
     "cost": 1,
@@ -156,6 +167,7 @@
   {
     "id": "ACG-102",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "武勇勲章",
     "reading": "ぶゆうくんしょう",
     "cost": 1,
@@ -170,6 +182,7 @@
   {
     "id": "ACG-103",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "わななき",
     "reading": "わななき",
     "cost": 1,
@@ -184,6 +197,7 @@
   {
     "id": "ACG-104",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "噴火の余波",
     "reading": "ふんかのよは",
     "cost": 1,
@@ -198,6 +212,7 @@
   {
     "id": "ACG-105",
     "product": "第2弾デッキ",
+    "sub_product": "パン田デッキ",
     "name": "不敬な撒き餌",
     "reading": "ふけいなまきえ",
     "cost": 1,
@@ -212,6 +227,7 @@
   {
     "id": "ACG-106",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "黒豹",
     "reading": "くろひょう",
     "cost": 1,
@@ -226,6 +242,7 @@
   {
     "id": "ACG-107",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜の外套の二匹",
     "reading": "よるのがいとうのにひき",
     "cost": 1,
@@ -240,6 +257,7 @@
   {
     "id": "ACG-108",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜の運び屋",
     "reading": "よるのはこびや",
     "cost": 1,
@@ -254,6 +272,7 @@
   {
     "id": "ACG-109",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夢食い",
     "reading": "ゆめくい",
     "cost": 1,
@@ -268,6 +287,7 @@
   {
     "id": "ACG-110",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "闇夜の先導者",
     "reading": "やみよのせんどうしゃ",
     "cost": 2,
@@ -282,6 +302,7 @@
   {
     "id": "ACG-111",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "極夜",
     "reading": "きょくや",
     "cost": 1,
@@ -296,6 +317,7 @@
   {
     "id": "ACG-112",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜に繋がる洞窟",
     "reading": "よるにつながるどうくつ",
     "cost": 0,
@@ -310,6 +332,7 @@
   {
     "id": "ACG-113",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "縄張り",
     "reading": "なわばり",
     "cost": 2,
@@ -324,6 +347,7 @@
   {
     "id": "ACG-114",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜知恵",
     "reading": "よるちえ",
     "cost": 1,
@@ -338,6 +362,7 @@
   {
     "id": "ACG-115",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜討",
     "reading": "ようち",
     "cost": 1,
@@ -352,6 +377,7 @@
   {
     "id": "ACG-116",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "地盤変動",
     "reading": "じばんへんどう",
     "cost": 0,
@@ -366,6 +392,7 @@
   {
     "id": "ACG-117",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "日食",
     "reading": "にっしょく",
     "cost": 1,
@@ -380,6 +407,7 @@
   {
     "id": "ACG-118",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "狩人の夜",
     "reading": "かりゅうどのよる",
     "cost": 1,
@@ -394,6 +422,7 @@
   {
     "id": "ACG-119",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜を告げる",
     "reading": "よるをつげる",
     "cost": 1,
@@ -408,6 +437,7 @@
   {
     "id": "ACG-120",
     "product": "第2弾デッキ",
+    "sub_product": "ヒョウデッキ",
     "name": "夜敬",
     "reading": "やけい",
     "cost": 2,
@@ -422,6 +452,7 @@
   {
     "id": "ACG-121",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "白夜",
     "reading": "びゃくや",
     "cost": 1,
@@ -436,6 +467,7 @@
   {
     "id": "ACG-122",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "意図的な酸性雨",
     "reading": "いとてきなさんせいう",
     "cost": 1,
@@ -450,6 +482,7 @@
   {
     "id": "ACG-123",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "浅い酸溜まり",
     "reading": "あさいさんだまり",
     "cost": 1,
@@ -464,6 +497,7 @@
   {
     "id": "ACG-124",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "悪夢",
     "reading": "あくむ",
     "cost": 1,
@@ -478,6 +512,7 @@
   {
     "id": "ACG-125",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "手枷",
     "reading": "てかせ",
     "cost": 1,
@@ -492,6 +527,7 @@
   {
     "id": "ACG-126",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "足枷",
     "reading": "あしかせ",
     "cost": 1,
@@ -506,6 +542,7 @@
   {
     "id": "ACG-127",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "独房",
     "reading": "どくぼう",
     "cost": 2,
@@ -520,6 +557,7 @@
   {
     "id": "ACG-128",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "拷問台",
     "reading": "ごうもんだい",
     "cost": 3,
@@ -534,6 +572,7 @@
   {
     "id": "ACG-129",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "複製",
     "reading": "ふくせい",
     "cost": 2,
@@ -548,6 +587,7 @@
   {
     "id": "ACG-130",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "城砦",
     "reading": "じょうさい",
     "cost": 2,
@@ -562,6 +602,7 @@
   {
     "id": "ACG-131",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "マウント・ゴリラ",
     "reading": "まうんとごりら",
     "cost": 3,
@@ -576,6 +617,7 @@
   {
     "id": "ACG-132",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "見物税",
     "reading": "けんぶつぜい",
     "cost": 1,
@@ -590,6 +632,7 @@
   {
     "id": "ACG-133",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "急拵えの罠",
     "reading": "きゅうごしらえのわな",
     "cost": 2,
@@ -604,6 +647,7 @@
   {
     "id": "ACG-134",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "不用品回収所",
     "reading": "ふようひんかいしゅうじょ",
     "cost": 1,
@@ -618,6 +662,7 @@
   {
     "id": "ACG-135",
     "product": "第2弾デッキ",
+    "sub_product": "蔵馬デッキ",
     "name": "輪廻の狭間",
     "reading": "りんねのはざま",
     "cost": 1,
@@ -632,6 +677,7 @@
   {
     "id": "ACG-136",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "群泳カジキ",
     "reading": "ぐんえいかじき",
     "cost": 2,
@@ -646,6 +692,7 @@
   {
     "id": "ACG-137",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "反射石",
     "reading": "はんしゃいし",
     "cost": 2,
@@ -660,6 +707,7 @@
   {
     "id": "ACG-138",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "亜音速カジキ",
     "reading": "あおんそくかじき",
     "cost": 8,
@@ -674,6 +722,7 @@
   {
     "id": "ACG-139",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "命削りの運び屋",
     "reading": "いのちけずりのはこびや",
     "cost": 1,
@@ -688,6 +737,7 @@
   {
     "id": "ACG-140",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "火速足袋",
     "reading": "かそくたび",
     "cost": 1,
@@ -702,6 +752,7 @@
   {
     "id": "ACG-141",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "希望漁り",
     "reading": "きぼうあさり",
     "cost": 2,
@@ -716,6 +767,7 @@
   {
     "id": "ACG-142",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "断崖を背に",
     "reading": "だんがいをせに",
     "cost": 7,
@@ -730,6 +782,7 @@
   {
     "id": "ACG-143",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "泥の像",
     "reading": "どろのぞう",
     "cost": 1,
@@ -744,6 +797,7 @@
   {
     "id": "ACG-144",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "獅子舞行軍",
     "reading": "ししまいこうぐん",
     "cost": 3,
@@ -758,6 +812,7 @@
   {
     "id": "ACG-145",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "交互の湯浴み",
     "reading": "こうごのゆあみ",
     "cost": 1,
@@ -772,6 +827,7 @@
   {
     "id": "ACG-146",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "道標",
     "reading": "みちしるべ",
     "cost": 3,
@@ -786,6 +842,7 @@
   {
     "id": "ACG-147",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "運命の帰郷",
     "reading": "うんめいのききょう",
     "cost": 1,
@@ -800,6 +857,7 @@
   {
     "id": "ACG-148",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "暗がりの保管庫",
     "reading": "くらがりのほかんこ",
     "cost": 2,
@@ -814,6 +872,7 @@
   {
     "id": "ACG-149",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "等価な検閲網",
     "reading": "とうかなけんえつもう",
     "cost": 3,
@@ -828,6 +887,7 @@
   {
     "id": "ACG-150",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "臨終の咆哮",
     "reading": "りんじゅうのほうこう",
     "cost": 1,
@@ -842,6 +902,7 @@
   {
     "id": "ACG-151",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "言伝",
     "reading": "ことづて",
     "cost": 0,
@@ -856,6 +917,7 @@
   {
     "id": "ACG-152",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "脱獄",
     "reading": "だつごく",
     "cost": 1,
@@ -870,6 +932,7 @@
   {
     "id": "ACG-153",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "救援物資",
     "reading": "きゅうえんぶっし",
     "cost": 0,
@@ -884,6 +947,7 @@
   {
     "id": "ACG-154",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "袋小路の捨て犬",
     "reading": "ふくろこうじのすていぬ",
     "cost": 1,
@@ -898,6 +962,7 @@
   {
     "id": "ACG-155",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "猫又",
     "reading": "ねこまた",
     "cost": 1,
@@ -912,6 +977,7 @@
   {
     "id": "ACG-156",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "テングザル",
     "reading": "てんぐざる",
     "cost": 1,
@@ -926,6 +992,7 @@
   {
     "id": "ACG-157",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "玩具の申し子",
     "reading": "がんぐのもうしご",
     "cost": 2,
@@ -940,6 +1007,7 @@
   {
     "id": "ACG-158",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "明日色のカメレオン",
     "reading": "あすいろのかめれおん",
     "cost": 1,
@@ -954,6 +1022,7 @@
   {
     "id": "ACG-159",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "鉄洗いグマ",
     "reading": "てつあらいぐま",
     "cost": 1,
@@ -968,6 +1037,7 @@
   {
     "id": "ACG-160",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "鉄クズ",
     "reading": "てつくず",
     "cost": 0,
@@ -982,6 +1052,7 @@
   {
     "id": "ACG-161",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "鉄鴉",
     "reading": "てつがらす",
     "cost": 0,
@@ -996,6 +1067,7 @@
   {
     "id": "ACG-162",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "カメレオンの永地",
     "reading": "かめれおんのえいち",
     "cost": 2,
@@ -1010,6 +1082,7 @@
   {
     "id": "ACG-163",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "此岸色のカメレオン",
     "reading": "しがんいろのかめれおん",
     "cost": 1,
@@ -1024,6 +1097,7 @@
   {
     "id": "ACG-164",
     "product": "第2弾デッキ",
+    "sub_product": "キメラサイクル構築済み",
     "name": "彼岸色のカメレオン",
     "reading": "ひがんいろのかめれおん",
     "cost": 2,
