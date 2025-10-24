@@ -89,14 +89,7 @@
             <div class="actions" style="margin-bottom:8px">
               <button id="btn-product-toggle">全選択／全解除</button>
             </div>
-            <div id="productBox" class="row-auto"></div>
-          </fieldset>
-          <fieldset style="margin-bottom:12px">
-            <legend>サブカテゴリ（複数選択可）</legend>
-            <div class="actions" style="margin-bottom:8px">
-              <button id="btn-subproduct-toggle">全選択／全解除</button>
-            </div>
-            <div id="subProductBox" class="row-auto"></div>
+            <div id="productTree" class="product-tree"></div>
           </fieldset>
 
           <div class="row-2">
@@ -224,6 +217,8 @@
     let ALL_RACES = [];
     let SELECTED_RACES = new Set();
     let TEMP_RACES = new Set();
+    // 商品→サブカテゴリの対応
+    let PRODUCT_CHILDREN = {};
 
     // 商品
     const SOURCES = [
@@ -264,21 +259,8 @@
 
     // カードデータをもとに検索条件設定値の動的生成
     function buildDynamicFilters(data){
-      var products = uniq(data.map(function(x){ return x.product; }));
       var types = uniq(data.map(function(x){ return x.type; }));
       var races    = uniq(data.map(function(x){ return x.race; }));
-      var subProducts = uniq(data.map(function(x){ return x.sub_product; })); // null/空は uniq で弾かれる
-
-      const productBox = document.getElementById('productBox');
-      productBox.innerHTML = products.map(p => `
-      <label><input type="checkbox" class="f-product" value="${p}"> ${esc(p)}</label>
-      `).join('');
-      productBox.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
-
-      // サブカテゴリ
-      var subProductBox = document.getElementById('subProductBox');
-      subProductBox.innerHTML = subProducts.map(function(s){ return '<label><input type="checkbox" class="f-subproduct" value="'+s+'"> '+esc(s)+'</label>'; }).join('');
-      subProductBox.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = true; });
 
       const typeBox = document.getElementById('typeBox');
       typeBox.innerHTML = types.map(t => `
@@ -290,8 +272,55 @@
       if (SELECTED_RACES.size === 0) { /* 初期は未指定（=すべて対象） */ }
       updateRaceSummary();
 
-      productBox.addEventListener('change', render);
-      subProductBox.addEventListener('change', render);
+      // product ごとに sub_product をグルーピング（子無しもキーを作る）
+      PRODUCT_CHILDREN = {};
+      const allProducts = uniq(data.map(x => x.product || "(不明)"));
+      allProducts.forEach(p => PRODUCT_CHILDREN[p] = new Set());
+      for (const c of data) {
+        const p = c.product || "(不明)";
+        if (c.sub_product) PRODUCT_CHILDREN[p].add(c.sub_product);
+      }
+      const productTree = document.getElementById("productTree");
+      productTree.innerHTML = Object.entries(PRODUCT_CHILDREN)
+        .map(([p, subs]) => {
+          const subsHtml = Array.from(subs)
+            .map(s => `<label class="subgroup"><input type="checkbox" class="f-subproduct" data-parent="${esc(p)}" value="${esc(s)}"> ${esc(s)}</label>`)
+            .join("");
+          return `<label><input type="checkbox" class="f-product" value="${esc(p)}"> ${esc(p)}</label>${subsHtml}`;
+        })
+        .join("");
+           // 初期チェックON
+      productTree.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+           // 親チェック→子へ反映
+      productTree.addEventListener("change", e => {
+        const t = e.target;
+        if (t.classList.contains("f-product")) {
+          const name = t.value;
+          const children = productTree.querySelectorAll(`.f-subproduct[data-parent="${CSS.escape(name)}"]`);
+          children.forEach(ch => ch.checked = t.checked);
+          // 親直操作時は indeterminate を消す
+          t.indeterminate = false;
+          render();
+          return;
+        }
+        if (t.classList.contains("f-subproduct")) {
+          // 子の状態に応じて親を更新
+          const parentName = t.getAttribute('data-parent');
+          updateParentCheckboxState(parentName);
+        }
+        render();
+      });
+
+      // 全選択／全解除
+      document.getElementById("btn-product-toggle").addEventListener("click", () => {
+        const all = Array.from(productTree.querySelectorAll('input[type="checkbox"]'));
+        const allChecked = all.every(cb => cb.checked);
+        all.forEach(cb => cb.checked = !allChecked);
+        // まとめて切替後、親の indeterminate をクリア
+        productTree.querySelectorAll('.f-product').forEach(p => p.indeterminate = false);
+        render();
+      });
+
       typeBox.addEventListener('change', render);
       // モーダル起動ボタン
       const openBtn = document.getElementById('btn-race-open');
@@ -300,22 +329,8 @@
         openBtn._bound = true;
       }
 
-      document.getElementById('btn-product-toggle').addEventListener('click', function(){
-        var all = Array.from(productBox.querySelectorAll('input[type="checkbox"]'));
-        var allChecked = all.every(function(cb){ return cb.checked; });
-        all.forEach(function(cb){ cb.checked = !allChecked; });
-        render();
-      });
-
-      var btnSubToggle = document.getElementById('btn-subproduct-toggle');
-      if (btnSubToggle) {
-        btnSubToggle.addEventListener('click', function(){
-          var all = Array.from(subProductBox.querySelectorAll('input[type="checkbox"]'));
-          var allChecked = all.every(function(cb){ return cb.checked; });
-          all.forEach(function(cb){ cb.checked = !allChecked; });
-          render();
-        });
-      }
+      // ★ すべての親について indeterminate を初期化
+      Object.keys(PRODUCT_CHILDREN).forEach(updateParentCheckboxState);
     }
 
     // ===== コスト：値ボタン =====
@@ -353,8 +368,8 @@
         none: parseIntOrNull(document.getElementById('need-none').value) || 0
       };
 
-      var selectedProducts = Array.from(document.querySelectorAll('.f-product:checked')).map(function(x){ return x.value; });
-      var selectedSubProducts = Array.from(document.querySelectorAll('.f-subproduct:checked')).map(function(x){ return x.value; });
+      const selectedProducts    = [...document.querySelectorAll('.f-product:checked')].map(x => x.value);
+      const selectedSubProducts = [...document.querySelectorAll('.f-subproduct:checked')].map(x => x.value);
       var selectedTypes = Array.from(document.querySelectorAll('.f-type:checked')).map(function(x){ return x.value; });
       var selectedRaces = Array.from(SELECTED_RACES);
 
@@ -416,12 +431,23 @@
       var readQ = normalize(f.qReading);
 
       return data.filter(function(card){
-        if(f.selectedProducts.length && f.selectedProducts.indexOf(card.product) === -1) return false;
-        if(f.selectedSubProducts.length){
-          // sub_product が null のカードは、サブカテゴリ選択がある場合は除外
-          if(card.sub_product == null) return false;
-          if(f.selectedSubProducts.indexOf(card.sub_product) === -1) return false;
+        if (f.selectedSubProducts.length) {
+          if (card.sub_product) {
+            // サブカテゴリを持つカード → sub_productが選ばれているか確認
+            if (f.selectedSubProducts.indexOf(card.sub_product) === -1) return false;
+          } else {
+            // サブカテゴリを持たないカード → 親(product)がONなら許可
+            const hasChildren = PRODUCT_CHILDREN[card.product] && PRODUCT_CHILDREN[card.product].size > 0;
+            if (hasChildren) {
+              // サブカテゴリを持つ商品だがsub_productなし → 除外
+              return false;
+            } else {
+              // サブカテゴリを持たない商品 → 親がONなら許可
+              if (f.selectedProducts.indexOf(card.product) === -1) return false;
+            }
+          }
         }
+
         if(f.selectedTypes.length && f.selectedTypes.indexOf(card.type) === -1) return false;
         if(f.selectedRaces.length && f.selectedRaces.indexOf(card.race) === -1) return false;
 
@@ -608,6 +634,23 @@
       const sel = TEMP_RACES.size || 0;
       selectAll.checked = total > 0 && sel === total;
       selectAll.indeterminate = sel > 0 && sel < total;
+    }
+
+    // 商品の子チェックに応じて親を checked/indeterminate に更新
+    function updateParentCheckboxState(parentName){
+      const tree = document.getElementById("productTree");
+      if (!tree) return;
+      const parent = tree.querySelector(`.f-product[value="${CSS.escape(parentName)}"]`);
+      if (!parent) return;
+      const children = tree.querySelectorAll(`.f-subproduct[data-parent="${CSS.escape(parentName)}"]`);
+      if (children.length === 0) {
+        // 子なし商品：親のみで状態を表現（何もしない）
+        return;
+      }
+      const total = children.length;
+      const checked = Array.from(children).filter(cb => cb.checked).length;
+      parent.checked = checked === total;
+      parent.indeterminate = checked > 0 && checked < total;
     }
 
     bindEvents();
