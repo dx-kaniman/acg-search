@@ -71,3 +71,31 @@ details summary { cursor: pointer; color: #555; }
 /* 種族設定用タグ */
 #raceSummary { gap: 6px; }
 #raceSummary .tag { background:#f3f7ff; border-color:#dfe7ff; }
+
+/* ページトップボタン */
+#btn-scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+#btn-scroll-top:hover {
+  background: #155ab6;
+  transform: scale(1.08);
+}
+#btn-scroll-top.hide {
+  opacity: 0;
+  pointer-events: none;
+}

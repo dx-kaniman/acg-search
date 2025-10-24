@@ -130,6 +130,25 @@
     <section id="resultGrid" class="grid" style="margin-top:10px"></section>
   </main>
 
+  <!-- 種族設定用モーダル ここから -->
+  <div id="raceModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="raceModalTitle">
+      <header class="modal-header">
+        <h2 id="raceModalTitle">種族を選ぶ</h2>
+        <label><input type="checkbox" id="raceModalSelectAll"> すべて選択 / 解除</label>
+      </header>
+      <div id="raceModalList" class="modal-body"></div>
+      <footer class="modal-footer">
+        <button id="btn-race-cancel">キャンセル</button>
+        <button id="btn-race-apply">設定する</button>
+      </footer>
+    </div>
+  </div>
+  <!-- 種族設定用モーダル ここまで -->
+  <!-- ページトップボタン -->
+  <button id="btn-scroll-top" title="ページ上部へ" style="display:none;">↑</button>
+
   <script>
     // 文字ユーティリティ（正規表現不使用）
     function toHalfWidth(s){
@@ -545,6 +564,7 @@
       var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','effectMode','sortBy','thumbMode','need-plain','need-mountain','need-aqua','need-forest','need-night','need-none'];
       ids.forEach(function(id){ document.getElementById(id).addEventListener('input', onChange); });
 
+      // リセットボタン押下時のイベント
       document.getElementById('btn-reset').addEventListener('click', function(){
         Array.from(document.querySelectorAll('input[type="text"], input[type="number"], textarea')).forEach(function(i){ i.value=''; });
         document.getElementById('effectMode').value = 'AND';
@@ -555,6 +575,20 @@
         Array.from(document.querySelectorAll('.f-type, .f-race')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('#costPills .pill.active')).forEach(function(p){ p.classList.remove('active'); });
         render();
+      });
+
+      // === ページトップボタン制御 ===
+      const topBtn = document.getElementById('btn-scroll-top');
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY || document.documentElement.scrollTop;
+        if (scrolled > 400) {
+          topBtn.style.display = 'block';
+        } else {
+          topBtn.style.display = 'none';
+        }
+      });
+      topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
@@ -656,21 +690,5 @@
     bindEvents();
     load();
   </script>
-<!-- 種族設定用モーダル ここから -->
-<div id="raceModal" class="modal hidden" aria-hidden="true">
-  <div class="modal-backdrop"></div>
-  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="raceModalTitle">
-    <header class="modal-header">
-      <h2 id="raceModalTitle">種族を選ぶ</h2>
-      <label><input type="checkbox" id="raceModalSelectAll"> すべて選択 / 解除</label>
-    </header>
-    <div id="raceModalList" class="modal-body"></div>
-    <footer class="modal-footer">
-      <button id="btn-race-cancel">キャンセル</button>
-      <button id="btn-race-apply">設定する</button>
-    </footer>
-  </div>
-</div>
-<!-- 種族設定用モーダル ここまで -->
 </body>
 </html>
