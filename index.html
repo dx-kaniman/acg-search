@@ -91,6 +91,13 @@
             </div>
             <div id="productBox" class="row-auto"></div>
           </fieldset>
+          <fieldset style="margin-bottom:12px">
+            <legend>サブカテゴリ（複数選択可）</legend>
+            <div class="actions" style="margin-bottom:8px">
+              <button id="btn-subproduct-toggle">全選択／全解除</button>
+            </div>
+            <div id="subProductBox" class="row-auto"></div>
+          </fieldset>
 
           <div class="row-2">
             <fieldset>
@@ -255,16 +262,23 @@
 
     function uniq(arr){ var s = new Set(); var out=[]; for(var i=0;i<arr.length;i++){ var v=arr[i]; if(v!==null && v!==undefined && v!==''){ if(!s.has(v)){ s.add(v); out.push(v); } } } return out; }
 
+    // カードデータをもとに検索条件設定値の動的生成
     function buildDynamicFilters(data){
       var products = uniq(data.map(function(x){ return x.product; }));
       var types = uniq(data.map(function(x){ return x.type; }));
       var races    = uniq(data.map(function(x){ return x.race; }));
+      var subProducts = uniq(data.map(function(x){ return x.sub_product; })); // null/空は uniq で弾かれる
 
       const productBox = document.getElementById('productBox');
       productBox.innerHTML = products.map(p => `
       <label><input type="checkbox" class="f-product" value="${p}"> ${esc(p)}</label>
       `).join('');
       productBox.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+
+      // サブカテゴリ
+      var subProductBox = document.getElementById('subProductBox');
+      subProductBox.innerHTML = subProducts.map(function(s){ return '<label><input type="checkbox" class="f-subproduct" value="'+s+'"> '+esc(s)+'</label>'; }).join('');
+      subProductBox.querySelectorAll('input[type="checkbox"]').forEach(function(cb){ cb.checked = true; });
 
       const typeBox = document.getElementById('typeBox');
       typeBox.innerHTML = types.map(t => `
@@ -277,6 +291,7 @@
       updateRaceSummary();
 
       productBox.addEventListener('change', render);
+      subProductBox.addEventListener('change', render);
       typeBox.addEventListener('change', render);
       // モーダル起動ボタン
       const openBtn = document.getElementById('btn-race-open');
@@ -291,6 +306,16 @@
         all.forEach(function(cb){ cb.checked = !allChecked; });
         render();
       });
+
+      var btnSubToggle = document.getElementById('btn-subproduct-toggle');
+      if (btnSubToggle) {
+        btnSubToggle.addEventListener('click', function(){
+          var all = Array.from(subProductBox.querySelectorAll('input[type="checkbox"]'));
+          var allChecked = all.every(function(cb){ return cb.checked; });
+          all.forEach(function(cb){ cb.checked = !allChecked; });
+          render();
+        });
+      }
     }
 
     // ===== コスト：値ボタン =====
@@ -307,6 +332,7 @@
     }
     function getSelectedCosts(){ return [...document.querySelectorAll('#costPills .pill.active')].map(el => parseInt(el.dataset.cost, 10)); }
 
+    // 検索条件の取得
     function getFilters(){
       var qName = document.getElementById('qName').value;
       var qReading = document.getElementById('qReading').value;
@@ -328,6 +354,7 @@
       };
 
       var selectedProducts = Array.from(document.querySelectorAll('.f-product:checked')).map(function(x){ return x.value; });
+      var selectedSubProducts = Array.from(document.querySelectorAll('.f-subproduct:checked')).map(function(x){ return x.value; });
       var selectedTypes = Array.from(document.querySelectorAll('.f-type:checked')).map(function(x){ return x.value; });
       var selectedRaces = Array.from(SELECTED_RACES);
 
@@ -335,7 +362,7 @@
       var thumbMode = document.getElementById('thumbMode').value;
       var costs = getSelectedCosts();
 
-      return { qName:qName, qReading:qReading, qEffect:qEffect, effectMode:effectMode, atkMin:atkMin, atkMax:atkMax, defMin:defMin, defMax:defMax, need:need, selectedProducts:selectedProducts, selectedTypes:selectedTypes, selectedRaces:selectedRaces, sortBy:sortBy, thumbMode:thumbMode, costs:costs };
+      return { qName:qName, qReading:qReading, qEffect:qEffect, effectMode:effectMode, atkMin:atkMin, atkMax:atkMax, defMin:defMin, defMax:defMax, need:need, selectedProducts:selectedProducts, selectedSubProducts:selectedSubProducts, selectedTypes:selectedTypes, selectedRaces:selectedRaces, sortBy:sortBy, thumbMode:thumbMode, costs:costs };
     }
 
     function matchEffect(effectText, query, mode){
@@ -390,6 +417,11 @@
 
       return data.filter(function(card){
         if(f.selectedProducts.length && f.selectedProducts.indexOf(card.product) === -1) return false;
+        if(f.selectedSubProducts.length){
+          // sub_product が null のカードは、サブカテゴリ選択がある場合は除外
+          if(card.sub_product == null) return false;
+          if(f.selectedSubProducts.indexOf(card.sub_product) === -1) return false;
+        }
         if(f.selectedTypes.length && f.selectedTypes.indexOf(card.type) === -1) return false;
         if(f.selectedRaces.length && f.selectedRaces.indexOf(card.race) === -1) return false;
 
@@ -455,6 +487,7 @@
       var thumbMode = document.getElementById('thumbMode').value;
       var tags = [];
       if(c.product) tags.push('<span class="tag">'+esc(c.product)+'</span>');
+      if(c.sub_product) tags.push('<span class="tag">'+esc(c.sub_product)+'</span>');
       if(c.type) tags.push('<span class="tag">'+esc(c.type)+'</span>');
       if(c.race) tags.push('<span class="tag">'+esc(c.race)+'</span>');
       if(typeof c.cost === 'number' && isFinite(c.cost)) tags.push('<span class="tag">Cost '+c.cost+'</span>');
@@ -492,6 +525,7 @@
         document.getElementById('sortBy').value = 'name';
         document.getElementById('thumbMode').value = 'on';
         Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = true; });
+        Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = true; });
         Array.from(document.querySelectorAll('.f-type, .f-race')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('#costPills .pill.active')).forEach(function(p){ p.classList.remove('active'); });
         render();
