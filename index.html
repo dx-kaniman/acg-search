@@ -308,8 +308,8 @@
           return `<label><input type="checkbox" class="f-product" value="${esc(p)}"> ${esc(p)}</label>${subsHtml}`;
         })
         .join("");
-           // 初期チェックON
-      productTree.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+           // 初期チェックOFF
+      productTree.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
            // 親チェック→子へ反映
       productTree.addEventListener("change", e => {
         const t = e.target;
