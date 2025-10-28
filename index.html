@@ -456,25 +456,30 @@
 
     function betweenOrNull(n, min, max){ if(n == null) return false; if(min != null && n < min) return false; if(max != null && n > max) return false; return true; }
 
+    // フィルタの適用
     function applyFilters(data, f){
       var nameQ = normalize(f.qName);
       var readQ = normalize(f.qReading);
 
       return data.filter(function(card){
-        if (f.selectedSubProducts.length) {
-          if (card.sub_product) {
-            // サブカテゴリを持つカード → sub_productが選ばれているか確認
-            if (f.selectedSubProducts.indexOf(card.sub_product) === -1) return false;
-          } else {
-            // サブカテゴリを持たないカード → 親(product)がONなら許可
-            const hasChildren = PRODUCT_CHILDREN[card.product] && PRODUCT_CHILDREN[card.product].size > 0;
-            if (hasChildren) {
-              // サブカテゴリを持つ商品だがsub_productなし → 除外
-              return false;
-            } else {
-              // サブカテゴリを持たない商品 → 親がONなら許可
-              if (f.selectedProducts.indexOf(card.product) === -1) return false;
-            }
+        // 選択されている親（商品）と子（サブカテゴリ）
+        const selParents = f.selectedProducts;          // ['第1弾デッキ', '領土', ...]
+        const selChildren = f.selectedSubProducts;      // ['AAデッキ', 'BBデッキ', ...]
+
+        // どちらも未選択なら、このカードは「商品条件での絞り込みなし」とみなして通す
+        if (selParents.length === 0 && selChildren.length === 0) {
+          // 何もしない（通す）
+        } else {
+          // 親(商品)が一致していれば通す
+          const parentMatch = selParents.indexOf(card.product) !== -1;
+
+          // 子(サブカテゴリ)が一致していれば通す
+          const childMatch = card.sub_product != null && selChildren.indexOf(card.sub_product) !== -1;
+
+          // 子カテゴリを持たないカードの場合でも、親がチェックされていれば parentMatch が true になるので通る
+          // 一方、親をチェックしていなくても、特定のサブカテゴリだけチェックしていれば childMatch で通る
+          if (!parentMatch && !childMatch) {
+            return false;
           }
         }
 
