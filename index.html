@@ -264,6 +264,7 @@
       'cards_ryo.json', // 領土
     ];
     var RAW = [];
+    const FILTER_STORAGE_KEY = 'acg-search:filters:v1';
 
     /**
      * カード画像URLをローカル配信用の相対パスへ変換する。
@@ -272,12 +273,103 @@
       return String(imageUrl).replace(/^https:\/\/acgtcg\.com\/img\//, 'img/');
     }
 
+    /**
+     * 保存済みの検索条件を読み込む。
+     */
+    function readSavedFilters(){
+      try{
+        const raw = localStorage.getItem(FILTER_STORAGE_KEY);
+        if(!raw) return null;
+        const filters = JSON.parse(raw);
+        return filters && typeof filters === 'object' ? filters : null;
+      }catch(e){
+        console.warn('検索条件の読み込みに失敗しました', e);
+        return null;
+      }
+    }
+
+    /**
+     * 現在の検索条件を保存する。
+     */
+    function saveFilters(){
+      try{
+        localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(getFilters()));
+      }catch(e){
+        console.warn('検索条件の保存に失敗しました', e);
+      }
+    }
+
+    /**
+     * 入力要素へ保存済みの値を戻す。
+     */
+    function restoreControlValue(id, value){
+      if(value === undefined || value === null) return;
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.value = value;
+    }
+
+    /**
+     * チェックボックス群へ保存済みの選択値を戻す。
+     */
+    function restoreCheckedValues(selector, values){
+      const selected = new Set(Array.isArray(values) ? values.map(String) : []);
+      document.querySelectorAll(selector).forEach(function(cb){
+        cb.checked = selected.has(String(cb.value));
+      });
+    }
+
+    /**
+     * コストボタンへ保存済みの選択値を戻す。
+     */
+    function restoreCostPills(costs){
+      const selected = new Set(Array.isArray(costs) ? costs.map(String) : []);
+      document.querySelectorAll('#costPills .pill').forEach(function(pill){
+        pill.classList.toggle('active', selected.has(String(pill.dataset.cost)));
+      });
+    }
+
+    /**
+     * 保存済みの検索条件を画面へ復元する。
+     */
+    function restoreSavedFilters(){
+      const saved = readSavedFilters();
+      if(!saved) return;
+
+      restoreControlValue('qName', saved.qName);
+      restoreControlValue('qReading', saved.qReading);
+      restoreControlValue('qEffect', saved.qEffect);
+      restoreControlValue('effectMode', saved.effectMode);
+      restoreControlValue('atkMin', saved.atkMin);
+      restoreControlValue('atkMax', saved.atkMax);
+      restoreControlValue('defMin', saved.defMin);
+      restoreControlValue('defMax', saved.defMax);
+      restoreControlValue('sortBy', saved.sortBy);
+      restoreControlValue('thumbMode', saved.thumbMode);
+
+      const need = saved.need || {};
+      restoreControlValue('need-plain', need.plain);
+      restoreControlValue('need-mountain', need.mountain);
+      restoreControlValue('need-aqua', need.aqua);
+      restoreControlValue('need-forest', need.forest);
+      restoreControlValue('need-night', need.night);
+      restoreControlValue('need-none', need.none);
+
+      restoreCheckedValues('.f-product', saved.selectedProducts);
+      restoreCheckedValues('.f-subproduct', saved.selectedSubProducts);
+      Object.keys(PRODUCT_CHILDREN).forEach(updateParentCheckboxState);
+      restoreCheckedValues('.f-type', saved.selectedTypes);
+      SELECTED_RACES = new Set(Array.isArray(saved.selectedRaces) ? saved.selectedRaces.filter(function(r){ return ALL_RACES.indexOf(r) !== -1; }) : []);
+      updateRaceSummary();
+      restoreCostPills(saved.costs);
+    }
+
     // 画面表示時のロード処理
     async function load(){
       const results = [];
       for(const url of SOURCES){
         try{
-          const res = await fetch(url, { cache: 'no-store' });
+          const res = await fetch(url);
           if(!res.ok) throw new Error(url + ' の取得に失敗しました');
           const arr = await res.json();
           const fallbackProduct = url.replace(/^.*\/(.+?)\.json$/, '$1');
@@ -294,6 +386,7 @@
       RAW = results;
       buildDynamicFilters(RAW);
       buildCostPills(RAW);
+      restoreSavedFilters();
       render();
     };
 
@@ -554,6 +647,7 @@
       document.getElementById('hitCount').textContent = items.length + ' 件ヒット';
       var grid = document.getElementById('resultGrid');
       grid.innerHTML = items.map(renderCard).join('');
+      saveFilters();
     }
 
     // 検索結果のカード1枚の描画
@@ -592,7 +686,11 @@
     function bindEvents(){
       var onChange = debounce(render, 120);
       var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','effectMode','sortBy','thumbMode','need-plain','need-mountain','need-aqua','need-forest','need-night','need-none'];
-      ids.forEach(function(id){ document.getElementById(id).addEventListener('input', onChange); });
+      ids.forEach(function(id){
+        const el = document.getElementById(id);
+        el.addEventListener('input', onChange);
+        el.addEventListener('change', onChange);
+      });
 
       // リセットボタン押下時のイベント
       document.getElementById('btn-reset').addEventListener('click', function(){
@@ -604,6 +702,9 @@
         Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = true; });
         Array.from(document.querySelectorAll('.f-type, .f-race')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('#costPills .pill.active')).forEach(function(p){ p.classList.remove('active'); });
+        SELECTED_RACES = new Set();
+        updateRaceSummary();
+        Object.keys(PRODUCT_CHILDREN).forEach(updateParentCheckboxState);
         render();
       });
 
