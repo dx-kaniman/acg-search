@@ -625,8 +625,8 @@
         document.getElementById('effectMode').value = 'AND';
         document.getElementById('sortBy').value = 'code';
         document.getElementById('thumbMode').value = 'on';
-        Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = true; });
-        Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = true; });
+        Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = false; });
+        Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('.f-type, .f-race')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('#costPills .pill.active')).forEach(function(p){ p.classList.remove('active'); });
         SELECTED_RACES = new Set();
