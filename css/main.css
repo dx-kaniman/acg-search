@@ -42,6 +42,16 @@ button:hover { background: #f5f5f5; }
 .territory-item label { white-space: nowrap; }
 
 .results-head { display: flex; align-items: center; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+.loading-panel { margin-top: 10px; padding: 12px; border: 1px solid #dfe7ff; border-radius: 10px; background: #f3f7ff; color: #334; display: flex; align-items: center; gap: 10px; }
+.loading-panel[hidden] { display: none; }
+.loading-spinner { width: 18px; height: 18px; border: 3px solid #d7e3ff; border-top-color: #1a73e8; border-radius: 50%; flex: 0 0 auto; animation: loading-spin .8s linear infinite; }
+body.is-loading header button,
+body.is-loading header input,
+body.is-loading header select,
+body.is-loading header textarea,
+body.is-loading .pill { pointer-events: none; }
+body.is-loading .filters { opacity: .58; }
+@keyframes loading-spin { to { transform: rotate(360deg); } }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
 .card-item { background: #fff; border: 1px solid #eee; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
 .thumb { /*aspect-ratio: 3/4;*/ background: #f3f3f3; display: grid; place-items: center; overflow: hidden; }

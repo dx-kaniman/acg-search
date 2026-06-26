@@ -20,7 +20,7 @@
   <meta name="twitter:description" content="アニマルカードゲーム（ACG）のカードを条件で検索できる非公式Webツールです。">
   <meta name="twitter:image" content="https://dx-kaniman.github.io/acg-search/ogp.png">
 </head>
-<body>
+<body class="is-loading">
   <header>
     <div class="wrap">
       <h1 style="margin:6px 0 12px">アニマルカードゲーム 検索</h1>
@@ -136,9 +136,13 @@
     </div>
   </header>
 
-  <main class="wrap" style="padding-top: 10px">
+  <main class="wrap" style="padding-top: 10px" aria-busy="true">
     <div class="results-head">
       <div id="hitCount">読込中…</div>
+    </div>
+    <div id="loadingPanel" class="loading-panel" role="status" aria-live="polite">
+      <span class="loading-spinner" aria-hidden="true"></span>
+      <span>カードデータを読み込み、検索条件を生成しています…</span>
     </div>
 
     <section id="resultGrid" class="grid" style="margin-top:10px"></section>
@@ -272,29 +276,45 @@
       return String(imageUrl).replace(/^https:\/\/acgtcg\.com\/img\//, 'img/');
     }
 
+    /**
+     * 初期表示中のローディング状態を切り替える。
+     */
+    function setLoading(active){
+      document.body.classList.toggle('is-loading', active);
+      const loadingPanel = document.getElementById('loadingPanel');
+      if (loadingPanel) loadingPanel.hidden = !active;
+      const main = document.querySelector('main.wrap');
+      if (main) main.setAttribute('aria-busy', active ? 'true' : 'false');
+    }
+
     // 画面表示時のロード処理
     async function load(){
+      setLoading(true);
       const results = [];
-      for(const url of SOURCES){
-        try{
-          const res = await fetch(url);
-          if(!res.ok) throw new Error(url + ' の取得に失敗しました');
-          const arr = await res.json();
-          const fallbackProduct = url.replace(/^.*\/(.+?)\.json$/, '$1');
-          for(const c of arr){
-            if(!c.product) c.product = fallbackProduct;
-            results.push(c);
-          }
-        }catch(e){ console.warn(e.message); }
+      try{
+        for(const url of SOURCES){
+          try{
+            const res = await fetch(url);
+            if(!res.ok) throw new Error(url + ' の取得に失敗しました');
+            const arr = await res.json();
+            const fallbackProduct = url.replace(/^.*\/(.+?)\.json$/, '$1');
+            for(const c of arr){
+              if(!c.product) c.product = fallbackProduct;
+              results.push(c);
+            }
+          }catch(e){ console.warn(e.message); }
         }
-      if(results.length===0){
-        document.getElementById('hitCount').textContent = 'データ読込エラー: JSON が読み込めませんでした';
-        return;
+        if(results.length===0){
+          document.getElementById('hitCount').textContent = 'データ読込エラー: JSON が読み込めませんでした';
+          return;
+        }
+        RAW = results;
+        buildDynamicFilters(RAW);
+        buildCostPills(RAW);
+        render();
+      }finally{
+        setLoading(false);
       }
-      RAW = results;
-      buildDynamicFilters(RAW);
-      buildCostPills(RAW);
-      render();
     };
 
     function uniq(arr){ var s = new Set(); var out=[]; for(var i=0;i<arr.length;i++){ var v=arr[i]; if(v!==null && v!==undefined && v!==''){ if(!s.has(v)){ s.add(v); out.push(v); } } } return out; }
