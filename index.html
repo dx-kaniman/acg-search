@@ -128,8 +128,9 @@
               <div class="territory-item"><label>森林</label><input id="need-forest" type="number" min="0" placeholder="0" /></div>
               <div class="territory-item"><label>夜</label><input id="need-night" type="number" min="0" placeholder="0" /></div>
               <div class="territory-item"><label>無</label><input id="need-none" type="number" min="0" placeholder="0" /></div>
+              <div class="territory-item"><label>領土なし</label><input id="need-empty" type="checkbox" /></div>
             </div>
-            <small style="color:#777">※カードの領土文字列（例：平山水森夜無 の1文字連結）を解析し、各カテゴリの個数が指定値以上であれば一致とみなします。未記載カードは、いずれかの必要数が1以上の場合は不一致として除外します。</small>
+            <small style="color:#777">※カードの領土文字列（例：平山水森夜無 の1文字連結）を解析し、各カテゴリの個数が指定値以上であれば一致とみなします。「領土なし」は未記載カードを対象にします。</small>
           </fieldset>
         </div>
       </div>
@@ -427,7 +428,8 @@
         aqua: parseIntOrNull(document.getElementById('need-aqua').value) || 0,
         forest: parseIntOrNull(document.getElementById('need-forest').value) || 0,
         night: parseIntOrNull(document.getElementById('need-night').value) || 0,
-        none: parseIntOrNull(document.getElementById('need-none').value) || 0
+        none: parseIntOrNull(document.getElementById('need-none').value) || 0,
+        empty: document.getElementById('need-empty').checked
       };
 
       const selectedProducts    = [...document.querySelectorAll('.f-product:checked')].map(x => x.value);
@@ -452,11 +454,16 @@
 
     // 必要個数 need を、スロット群から満たせるか判定（各スロットは選択肢から1つだけ選べる）
     function matchTerritory(card, need){
-      // need: { plain, mountain, aqua, forest, night, none }
+      // need: { plain, mountain, aqua, forest, night, none, empty }
       const anyNeed = (need.plain>0)||(need.mountain>0)||(need.aqua>0)||(need.forest>0)||(need.night>0)||(need.none>0);
+      const wantsEmptyTerritory = !!need.empty;
       const t = card.territory || "";
+      const hasTerritory = String(t).trim() !== "";
+      const isTerritoryProduct = card.product === '領土' || card.product === 'cards_ryo';
 
-      if (!t) return anyNeed ? false : true;
+      if (wantsEmptyTerritory && isTerritoryProduct) return false;
+      if (!hasTerritory) return wantsEmptyTerritory || !anyNeed;
+      if (wantsEmptyTerritory && !anyNeed) return false;
 
       const slots = parseTerritorySlots(t);
       if (!anyNeed) return true; // 条件なし
@@ -612,7 +619,7 @@
 
     function bindEvents(){
       var onChange = debounce(render, 120);
-      var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','effectMode','sortBy','thumbMode','need-plain','need-mountain','need-aqua','need-forest','need-night','need-none'];
+      var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','effectMode','sortBy','thumbMode','need-plain','need-mountain','need-aqua','need-forest','need-night','need-none','need-empty'];
       ids.forEach(function(id){
         const el = document.getElementById(id);
         el.addEventListener('input', onChange);
@@ -625,6 +632,7 @@
         document.getElementById('effectMode').value = 'AND';
         document.getElementById('sortBy').value = 'code';
         document.getElementById('thumbMode').value = 'on';
+        document.getElementById('need-empty').checked = false;
         Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('.f-type, .f-race')).forEach(function(cb){ cb.checked = false; });
