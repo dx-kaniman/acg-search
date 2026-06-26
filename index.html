@@ -580,6 +580,7 @@
     function renderCard(c){
       var thumbMode = document.getElementById('thumbMode').value;
       var tags = [];
+      if(c.id) tags.push('<span class="tag">'+esc(c.id)+'</span>');
       if(c.product) tags.push('<span class="tag">'+esc(c.product)+'</span>');
       if(c.sub_product) tags.push('<span class="tag">'+esc(c.sub_product)+'</span>');
       if(c.type) tags.push('<span class="tag">'+esc(c.type)+'</span>');
