@@ -26,56 +26,33 @@
       <h1 style="margin:6px 0 12px">アニマルカードゲーム 検索</h1>
       <div class="actions" style="margin-bottom:8px">
         <button id="btn-reset">条件をリセット</button>
-        <div style="display:flex; align-items:center; gap:8px; flex-wrap: wrap;">
-          <label style="display:flex; gap:6px; align-items:center">
-            効果語句の結合:
-            <select id="effectMode">
-              <option value="AND">AND（すべて含む）</option>
-              <option value="OR">OR（いずれか含む）</option>
-            </select>
-          </label>
-          <label style="display:flex; gap:6px; align-items:center">
-            画像表示:
-            <select id="thumbMode">
-              <option value="on">あり</option>
-              <option value="off">なし</option>
-            </select>
-          </label>
-          <label style="display:flex; gap:6px; align-items:center">
-            ソート:
-            <select id="sortBy">
-              <option value="code">カード番号順</option>
-              <option value="name">名前（あ→）</option>
-              <option value="costAsc">コスト（昇順）</option>
-              <option value="costDesc">コスト（降順）</option>
-              <option value="atkDesc">ATK（降順）</option>
-              <option value="defDesc">DEF（降順）</option>
-              <option value="product">商品（五十音）</option>
-            </select>
-          </label>
-        </div>
+        <button id="btn-options-open" type="button">オプション</button>
       </div>
 
       <div class="filters">
         <div class="card">
-          <fieldset>
-            <legend>カード名・読み仮名</legend>
+          <fieldset data-filter-key="name">
+            <legend>カード名</legend>
             <label>
               <div>カード名（部分一致）</div>
               <input id="qName" type="text" placeholder="例：ワニ、狐 など" />
             </label>
+          </fieldset>
+
+          <fieldset data-filter-key="reading">
+            <legend>読み仮名</legend>
             <label>
               <div>読み仮名（ひら/カナどちらでも）</div>
               <input id="qReading" type="text" placeholder="例：わに／キツネ など" />
             </label>
           </fieldset>
 
-          <fieldset>
+          <fieldset data-filter-key="effect">
             <legend>効果テキスト（空白区切りで複数語）</legend>
             <textarea id="qEffect" placeholder="例：墓地 除外 手札に加える など"></textarea>
           </fieldset>
 
-          <fieldset>
+          <fieldset data-filter-key="cost">
             <legend>コスト（範囲ではなく値を選択）</legend>
             <div id="costPills" class="pillbar"></div>
             <div class="actions" style="margin-top:8px">
@@ -83,7 +60,7 @@
             </div>
           </fieldset>
 
-          <div class="row-2 stats-row">
+          <div class="row-2 stats-row" data-filter-key="stats">
             <fieldset>
               <legend>ATK</legend>
               <label>最小<input id="atkMin" type="number" min="0" /></label>
@@ -98,7 +75,7 @@
         </div>
 
         <div class="card" id="dynamicFilters">
-          <fieldset style="margin-bottom:12px">
+          <fieldset style="margin-bottom:12px" data-filter-key="product">
             <legend>商品（複数選択可）</legend>
             <div class="actions" style="margin-bottom:8px">
               <button id="btn-product-toggle">全選択／全解除</button>
@@ -107,11 +84,11 @@
           </fieldset>
 
           <div class="row-2">
-            <fieldset>
+            <fieldset data-filter-key="type">
               <legend>タイプ（複数選択可）</legend>
               <div id="typeBox" class="row-auto"></div>
             </fieldset>
-            <fieldset>
+            <fieldset data-filter-key="race">
               <legend>種族（複数選択可）</legend>
               <div id="raceSummary" class="tags"></div>
               <button type="button" id="btn-race-open">種族を選ぶ</button>
@@ -119,7 +96,7 @@
             </fieldset>
           </div>
 
-          <fieldset style="margin-top:12px">
+          <fieldset style="margin-top:12px" data-filter-key="territory">
             <legend>領土条件（必要個数以上）</legend>
             <div class="territory-grid">
               <div class="territory-item"><label>平野</label><input id="need-plain" type="number" min="0" placeholder="0" /></div>
@@ -165,6 +142,61 @@
     </div>
   </div>
   <!-- 種族設定用モーダル ここまで -->
+  <!-- オプション設定用モーダル ここから -->
+  <div id="optionsModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="optionsModalTitle">
+      <header class="modal-header">
+        <h2 id="optionsModalTitle">オプション</h2>
+      </header>
+      <div class="modal-body options-body">
+        <label>
+          <div>効果語句の結合</div>
+          <select id="effectMode">
+            <option value="AND">AND（すべて含む）</option>
+            <option value="OR">OR（いずれか含む）</option>
+          </select>
+        </label>
+        <label>
+          <div>画像表示</div>
+          <select id="thumbMode">
+            <option value="on">あり</option>
+            <option value="off">なし</option>
+          </select>
+        </label>
+        <label>
+          <div>ソート</div>
+          <select id="sortBy">
+            <option value="code">カード番号順</option>
+            <option value="name">名前（あ→）</option>
+            <option value="costAsc">コスト（昇順）</option>
+            <option value="costDesc">コスト（降順）</option>
+            <option value="atkDesc">ATK（降順）</option>
+            <option value="defDesc">DEF（降順）</option>
+            <option value="product">商品（五十音）</option>
+          </select>
+        </label>
+        <fieldset class="options-fieldset">
+          <legend>表示する検索条件</legend>
+          <div class="options-checks">
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="name" checked> カード名</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="reading" checked> 読み仮名</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="effect" checked> 効果テキスト</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="cost" checked> コスト</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="stats" checked> ATK/DEF</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="product" checked> 商品</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="type" checked> タイプ</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="race" checked> 種族</label>
+            <label><input type="checkbox" class="option-filter-toggle" data-filter-option="territory" checked> 領土条件</label>
+          </div>
+        </fieldset>
+      </div>
+      <footer class="modal-footer">
+        <button id="btn-options-close" type="button">閉じる</button>
+      </footer>
+    </div>
+  </div>
+  <!-- オプション設定用モーダル ここまで -->
   <!-- ページトップボタン -->
   <button id="btn-scroll-top" title="ページ上部へ" style="display:none;">↑</button>
 
@@ -270,11 +302,144 @@
       'cards_ryo.json', // 領土
     ];
     var RAW = [];
+    const OPTIONS_STORAGE_KEY = 'acg-search:options:v1';
+    const OPTION_IDS = ['effectMode', 'thumbMode', 'sortBy'];
+    const FILTER_VISIBILITY_KEYS = ['name','reading','effect','cost','stats','product','type','race','territory'];
+    const DEFAULT_VISIBLE_FILTERS = { name: true, reading: true, effect: true, cost: true, stats: true, product: true, type: true, race: true, territory: true };
+    const DEFAULT_OPTIONS = { effectMode: 'AND', thumbMode: 'on', sortBy: 'code', visibleFilters: DEFAULT_VISIBLE_FILTERS };
+
     /**
      * カード画像URLをローカル配信用の相対パスへ変換する。
      */
     function toLocalImageUrl(imageUrl){
       return String(imageUrl).replace(/^https:\/\/acgtcg\.com\/img\//, 'img/');
+    }
+
+    /**
+     * 保存済みのオプション設定を読み込む。
+     */
+    function readSavedOptions(){
+      try{
+        const raw = localStorage.getItem(OPTIONS_STORAGE_KEY);
+        if(!raw) return {};
+        const options = JSON.parse(raw);
+        return options && typeof options === 'object' ? options : {};
+      }catch(e){
+        console.warn('オプション設定の読み込みに失敗しました', e);
+        return {};
+      }
+    }
+
+    /**
+     * 保存値から検索条件の表示設定を組み立てる。
+     */
+    function getVisibleFilterOptions(options){
+      const saved = options && options.visibleFilters && typeof options.visibleFilters === 'object' ? options.visibleFilters : {};
+      const visibleFilters = {};
+      FILTER_VISIBILITY_KEYS.forEach(function(key){
+        visibleFilters[key] = saved[key] !== false;
+      });
+      return visibleFilters;
+    }
+
+    /**
+     * select に有効なオプション値を反映する。
+     */
+    function setOptionValue(id, value){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const fallback = DEFAULT_OPTIONS[id];
+      const nextValue = Array.from(el.options).some(function(option){ return option.value === value; }) ? value : fallback;
+      el.value = nextValue;
+    }
+
+    /**
+     * 検索条件の表示設定を画面に反映する。
+     */
+    function applyFilterVisibility(visibleFilters){
+      FILTER_VISIBILITY_KEYS.forEach(function(key){
+        const visible = visibleFilters[key] !== false;
+        document.querySelectorAll('[data-filter-key="'+key+'"]').forEach(function(el){ el.hidden = !visible; });
+        document.querySelectorAll('[data-filter-option="'+key+'"]').forEach(function(el){ el.checked = visible; });
+      });
+    }
+
+    /**
+     * オプション設定を画面へ反映する。
+     */
+    function applyOptions(options){
+      const merged = Object.assign({}, DEFAULT_OPTIONS, options || {});
+      OPTION_IDS.forEach(function(id){ setOptionValue(id, merged[id]); });
+      applyFilterVisibility(getVisibleFilterOptions(merged));
+    }
+
+    /**
+     * 現在の検索条件の表示設定を取得する。
+     */
+    function getCurrentFilterVisibilityOptions(){
+      const visibleFilters = {};
+      FILTER_VISIBILITY_KEYS.forEach(function(key){
+        const el = document.querySelector('[data-filter-option="'+key+'"]');
+        visibleFilters[key] = !el || el.checked;
+      });
+      return visibleFilters;
+    }
+
+    /**
+     * 現在のオプション設定を取得する。
+     */
+    function getOptions(){
+      const options = {};
+      OPTION_IDS.forEach(function(id){
+        const el = document.getElementById(id);
+        options[id] = el ? el.value : DEFAULT_OPTIONS[id];
+      });
+      options.visibleFilters = getCurrentFilterVisibilityOptions();
+      return options;
+    }
+
+    /**
+     * 指定した検索条件が表示対象かを返す。
+     */
+    function isFilterVisible(key){
+      const el = document.querySelector('[data-filter-option="'+key+'"]');
+      return !el || el.checked;
+    }
+
+    /**
+     * 現在のオプション設定を保存する。
+     */
+    function saveOptions(){
+      try{
+        localStorage.setItem(OPTIONS_STORAGE_KEY, JSON.stringify(getOptions()));
+      }catch(e){
+        console.warn('オプション設定の保存に失敗しました', e);
+      }
+    }
+
+    /**
+     * 保存済みのオプション設定を初期表示へ反映する。
+     */
+    function loadOptions(){
+      applyOptions(readSavedOptions());
+    }
+
+    /**
+     * オプション設定モーダルを開く。
+     */
+    function openOptionsModal(){
+      const modal = document.getElementById('optionsModal');
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden','false');
+    }
+
+    /**
+     * オプション設定モーダルを閉じる。
+     */
+    function closeOptionsModal(){
+      const modal = document.getElementById('optionsModal');
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden','true');
     }
 
     /**
@@ -412,17 +577,17 @@
 
     // 検索条件の取得
     function getFilters(){
-      var qName = document.getElementById('qName').value;
-      var qReading = document.getElementById('qReading').value;
-      var qEffect = document.getElementById('qEffect').value;
+      var qName = isFilterVisible('name') ? document.getElementById('qName').value : '';
+      var qReading = isFilterVisible('reading') ? document.getElementById('qReading').value : '';
+      var qEffect = isFilterVisible('effect') ? document.getElementById('qEffect').value : '';
       var effectMode = document.getElementById('effectMode').value;
 
-      var atkMin = parseIntOrNull(document.getElementById('atkMin').value);
-      var atkMax = parseIntOrNull(document.getElementById('atkMax').value);
-      var defMin = parseIntOrNull(document.getElementById('defMin').value);
-      var defMax = parseIntOrNull(document.getElementById('defMax').value);
+      var atkMin = isFilterVisible('stats') ? parseIntOrNull(document.getElementById('atkMin').value) : null;
+      var atkMax = isFilterVisible('stats') ? parseIntOrNull(document.getElementById('atkMax').value) : null;
+      var defMin = isFilterVisible('stats') ? parseIntOrNull(document.getElementById('defMin').value) : null;
+      var defMax = isFilterVisible('stats') ? parseIntOrNull(document.getElementById('defMax').value) : null;
 
-      var need = {
+      var need = isFilterVisible('territory') ? {
         plain: parseIntOrNull(document.getElementById('need-plain').value) || 0,
         mountain: parseIntOrNull(document.getElementById('need-mountain').value) || 0,
         aqua: parseIntOrNull(document.getElementById('need-aqua').value) || 0,
@@ -430,16 +595,16 @@
         night: parseIntOrNull(document.getElementById('need-night').value) || 0,
         none: parseIntOrNull(document.getElementById('need-none').value) || 0,
         empty: document.getElementById('need-empty').checked
-      };
+      } : { plain:0, mountain:0, aqua:0, forest:0, night:0, none:0, empty:false };
 
-      const selectedProducts    = [...document.querySelectorAll('.f-product:checked')].map(x => x.value);
-      const selectedSubProducts = [...document.querySelectorAll('.f-subproduct:checked')].map(x => x.value);
-      var selectedTypes = Array.from(document.querySelectorAll('.f-type:checked')).map(function(x){ return x.value; });
-      var selectedRaces = Array.from(SELECTED_RACES);
+      const selectedProducts    = isFilterVisible('product') ? [...document.querySelectorAll('.f-product:checked')].map(x => x.value) : [];
+      const selectedSubProducts = isFilterVisible('product') ? [...document.querySelectorAll('.f-subproduct:checked')].map(x => x.value) : [];
+      var selectedTypes = isFilterVisible('type') ? Array.from(document.querySelectorAll('.f-type:checked')).map(function(x){ return x.value; }) : [];
+      var selectedRaces = isFilterVisible('race') ? Array.from(SELECTED_RACES) : [];
 
       var sortBy = document.getElementById('sortBy').value;
       var thumbMode = document.getElementById('thumbMode').value;
-      var costs = getSelectedCosts();
+      var costs = isFilterVisible('cost') ? getSelectedCosts() : [];
 
       return { qName:qName, qReading:qReading, qEffect:qEffect, effectMode:effectMode, atkMin:atkMin, atkMax:atkMax, defMin:defMin, defMax:defMax, need:need, selectedProducts:selectedProducts, selectedSubProducts:selectedSubProducts, selectedTypes:selectedTypes, selectedRaces:selectedRaces, sortBy:sortBy, thumbMode:thumbMode, costs:costs };
     }
@@ -619,19 +784,32 @@
 
     function bindEvents(){
       var onChange = debounce(render, 120);
-      var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','effectMode','sortBy','thumbMode','need-plain','need-mountain','need-aqua','need-forest','need-night','need-none','need-empty'];
+      var ids = ['qName','qReading','qEffect','atkMin','atkMax','defMin','defMax','need-plain','need-mountain','need-aqua','need-forest','need-night','need-none','need-empty'];
       ids.forEach(function(id){
         const el = document.getElementById(id);
         el.addEventListener('input', onChange);
         el.addEventListener('change', onChange);
       });
+      OPTION_IDS.forEach(function(id){
+        document.getElementById(id).addEventListener('change', function(){
+          saveOptions();
+          render();
+        });
+      });
+      document.querySelectorAll('.option-filter-toggle').forEach(function(el){
+        el.addEventListener('change', function(){
+          applyFilterVisibility(getCurrentFilterVisibilityOptions());
+          saveOptions();
+          render();
+        });
+      });
+      document.getElementById('btn-options-open').addEventListener('click', openOptionsModal);
+      document.getElementById('btn-options-close').addEventListener('click', closeOptionsModal);
+      document.querySelector('#optionsModal .modal-backdrop').addEventListener('click', closeOptionsModal);
 
       // リセットボタン押下時のイベント
       document.getElementById('btn-reset').addEventListener('click', function(){
         Array.from(document.querySelectorAll('input[type="text"], input[type="number"], textarea')).forEach(function(i){ i.value=''; });
-        document.getElementById('effectMode').value = 'AND';
-        document.getElementById('sortBy').value = 'code';
-        document.getElementById('thumbMode').value = 'on';
         document.getElementById('need-empty').checked = false;
         Array.from(document.querySelectorAll('.f-product')).forEach(function(cb){ cb.checked = false; });
         Array.from(document.querySelectorAll('.f-subproduct')).forEach(function(cb){ cb.checked = false; });
@@ -753,6 +931,7 @@
       parent.indeterminate = checked > 0 && checked < total;
     }
 
+    loadOptions();
     bindEvents();
     load();
   </script>

@@ -72,6 +72,11 @@ details summary { cursor: pointer; color: #555; }
 .modal-header { padding: 14px 16px; border-bottom: 1px solid #eee; }
 .modal-body { padding: 12px 16px; max-height: 60vh; overflow: auto; display: grid; gap: 8px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.options-body { grid-template-columns: 1fr; }
+.options-body label { margin: 0; }
+.options-fieldset { margin: 4px 0 0; }
+.options-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 4px 12px; }
+.options-checks label { margin: 4px 0; }
 .modal-footer { padding: 12px 16px; border-top: 1px solid #eee; display: flex; gap: 8px; justify-content: flex-end; }
 
 /* 種族設定用タグ */
