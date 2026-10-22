@@ -12,9 +12,17 @@
     .replace(/\n{3,}/g, "\n\n")
     .trim();
 
-  const splitReadingAndName = (head) => {
-    const m = String(head).match(/^([\u3040-\u30FFー・＝]+)(.+)$/u);
-    return m ? { reading: m[1].trim(), name: m[2].trim() } : { reading: null, name: String(head).trim() };
+  /** 名前と読みの専用要素を取得し、要素がない場合だけヘッダを補助に使う。 */
+  const extractNameAndReading = (el, head) => {
+    const nameEl = el.querySelector(".cardlist_name");
+    const readingEl = el.querySelector(".cardlist_ruby");
+    const reading = readingEl ? readingEl.textContent.trim() : null;
+    let name = nameEl ? nameEl.textContent.trim() : String(head).trim();
+    if (!nameEl && reading && name.startsWith(reading)) {
+      name = name.slice(reading.length).trim();
+    }
+    name = name.replace(/（\s*[A-Z]+[0-9]*-[0-9]{3,}\s*）\s*$/, "").trim();
+    return { reading: reading || null, name };
   };
 
   // 領土：1文字＋スラッシュ保持（平/山/水/森/夜/無 と ／ を許可）
@@ -78,7 +86,7 @@ const territoryCharsFromCond = (raw) => {
       const i = rawText.indexOf("［");
       head = i >= 0 ? rawText.slice(0, i) : rawText;
     }
-    const { reading, name } = splitReadingAndName(head);
+    const { reading, name } = extractNameAndReading(el, head);
 
     const costStr = pickBracket("コスト", rawText);
     const condStr = pickBracket("条件", rawText);
